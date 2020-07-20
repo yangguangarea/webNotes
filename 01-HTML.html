@@ -250,11 +250,43 @@ base标签
 
 ---------------------------------------------
 表单
+
+input控件 <input type="属性值" value="内容">
+1.type属性 设置不同的属性值用来指定不同的控件类型
+
+text 单行文本输出框 <input type="text" name="" id="" value="">
+password 密码输入框 <input type="password" name="" id="">
+radio 单选 <input type="radio" name="" id="">
+checkbox 多选 <input type="checkbox" name="" id="">
+button 普通按钮 <input type="button" value="">
+submit 提交按钮 <input type="submit" value="">
+reset  重置按钮 <input type="reset" value="">
+image 图片提交按钮 <input type="image" src="" alt="">
+    图片提交按钮必须包含 src属性
+file 文件域 <input type="file" name="" id=""> 上传文件用的
+
+
+2.value属性 表单刚打开时默认的显示的值
+3.name属性 给表单命名 用来区分不同的表单
+    如果是radio,checkbox name要起同一个名称
+4.checked属性 表示默认选中的状态。常见于radio checkbox
 ---------------------------------------------
+label标签 <label for=""></label>
+<label for="un">用户名：</label> <input type="text" name="" id="un">
+label的 for 对应 另一个标签的id
+可以实现点击文字的时候，光标会定位到指定的表单里
 
 ---------------------------------------------
-
+textarea文本域标签
+<textarea name="" id="" cols="30" rows="10"></textarea>
+用于留言板之类的,实际开始用css给宽度和高度，一般不用cols和rows
 ---------------------------------------------
+select下拉列表
+<select name="" id="">
+    <option value=""></option>
+    <option value=""></option>
+</select>
+
 
 ---------------------------------------------
 
