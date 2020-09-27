@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>Document</title>
+<style>
+    baidiv
+    {
+        width:100px;
+        height:100px;
+        background: #abcdef;
+        margin: 2px;
+    }
+    #container
+    {
+        background: none;
+    }
+
+    .v-align {
+    margin: 0 auto;
+    width: 200px;
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+    border: 1px solid #ddd;
+    }
+
+</style>
+
+
+
+<script type="text/javascript">
+    window.onload=function() {
+        var oDivContainer=document.getElementById('container');
+        var oBtn1=document.getElementById('btnAdd');
+        var aBtn=oDivContainer.getElementsByTagName('input');
+        oBtn1.onclick=function() {
+            var oDiv=document.createElement('div');//创建div
+            var oButton=document.createElement('input');//创建button
+            oButton.type='button';
+            oButton.value="删除";
+            oDiv.appendChild(oButton);//将button添加到div中
+            oDivContainer.appendChild(oDiv);//将div添加到页面中
+            //为创建的button添加单击事件
+            for(var i=0;i<aBtn.length;i++) {
+                aBtn[i].onclick=function() {
+                    oDivContainer.removeChild(this.parentNode);//从根节点上移除button的父节点，也就是创建的div
+                }
+            }
+        }
+
+		var jumpDiv = document.createElement('div');
+
+		jumpDiv.id = "VideoJump";
+		jumpDiv.style.height = "90px";
+		jumpDiv.style.width = "100%";
+		jumpDiv.style.backgroundColor = "#fff";
+        jumpDiv.style.position = "absolute";
+        jumpDiv.style.bottom = "0%";
+		// cocosContainer.appendChild(jumpDiv);
+		oDivContainer.appendChild(jumpDiv);
+
+        var logo58 = document.createElement('div');
+		logo58.id = "logo58";
+        
+		logo58.style.width = "178px";//178px
+		logo58.style.height = "60px";//60px
+        // logo58.style.lineHeight = "50px";
+        logo58.style.position = "absolute";
+        // logo58.style.bottom = "0%";
+        // logo58.style.marginTop = "-4px";
+        logo58.style.backgroundImage = "url(http://img.58cdn.com.cn/m58/img/dreamtownTaskVideo/58logo.png)";
+        logo58.style.left = "15%";
+		logo58.style.top = "20%";
+		logo58.style.transform = "scale(0.5)";
+		logo58.style.backgroundRepeat = "no-repeat";
+        // logo58.style.position = "relative";
+        jumpDiv.appendChild(logo58);
+
+
+        var jumpBtn = document.createElement('div');
+        jumpBtn.onclick = () => {
+            console.log("-----跳转");
+            // var icon = document.getElementById('CloseIcon');
+            // if(icon.style.display === "none") {
+            //     icon.style.display = "block";
+            // } else {
+            //     icon.style.display = "none";
+            // }
+			
+        }
+        jumpBtn.id = "JumpBtn";
+        jumpBtn.style.width = "190px";//190px
+		jumpBtn.style.height = "80px";//80px
+        // jumpBtn.style.lineHeight = "50px";
+        jumpBtn.style.position = "absolute";
+        // jumpBtn.style.bottom = "0%";
+        // jumpBtn.style.marginTop = "-4px";
+        // jumpBtn.style.backgroundImage = "url(http://img.58cdn.com.cn/m58/img/dreamtownTaskVideo/jumpBtn.png)";
+		// jumpBtn.style.backgroundRepeat = "no-repeat";
+		jumpBtn.style.background = "#FF5B02";
+		jumpBtn.style.borderRadius = "12px";
+		jumpBtn.style.right = "15%";
+		jumpBtn.style.top = "20%";
+		// jumpBtn.style.textAlign = "center";
+		// jumpBtn.style.position = "relative";
+		jumpBtn.style.transform = "scale(0.5)";
+        
+        jumpDiv.appendChild(jumpBtn);
+
+		
+        jumpBtn.style.color = "#FFFFFF";
+        jumpBtn.style.fontSize = "32px";
+        jumpBtn.style.fontFamily = "PingFangSC-Medium";
+        jumpBtn.style.letterSpacing = "0";
+        jumpBtn.style.textAlign = "center";
+        jumpBtn.style.lineHeight = "80px";
+        jumpBtn.innerHTML = "查看详情";
+		// var jumpBtnLabel = document.createElement('div');
+
+		// var jumpBtnLabel = document.createTextNode("查看详情");
+		// jumpBtn.appendChild(jumpBtnLabel);
+		// jumpBtnLabel.id = "JumpBtnLabel";
+		// jumpBtnLabel.
+
+        // jumpBtnLabel.backgroundColor = '#fff'
+
+
+        //----------------------------------------------
+
+
+        var closeBtn = document.createElement('div');
+        closeBtn.onclick = () => {
+            console.log("-----关闭按钮");
+        }
+        closeBtn.id = "CloseBtn";
+        closeBtn.style.width = "56px";//190px
+		closeBtn.style.height = "56px";//80px
+        closeBtn.style.position = "absolute";
+		closeBtn.style.background = "#3C3C3C";
+		closeBtn.style.borderRadius = "50%";
+		closeBtn.style.right = "4%";
+		closeBtn.style.top = "2%";
+		closeBtn.style.transform = "scale(0.5)";
+		closeBtn.style.textAlign = "center";
+		oDivContainer.appendChild(closeBtn);
+		
+
+        var closeIcon = document.createElement('div');
+        closeIcon.onclick = () => {
+            console.log("-----关闭按钮");
+        }
+        closeIcon.id = "CloseIcon";
+        closeIcon.style.width = "30px";//190px
+		closeIcon.style.height = "30px";//80px
+        // closeIcon.style.lineHeight = "50px";
+        // closeIcon.style.position = "absolute";
+        // closeIcon.style.bottom = "0%";
+        // closeIcon.style.marginTop = "-4px";
+        closeIcon.style.margin = "26% 26%";
+        closeIcon.style.backgroundImage = "url(http://img.58cdn.com.cn/m58/img/dreamtownTaskVideo/btn_close_icon.png)";
+		closeIcon.style.backgroundRepeat = "no-repeat";
+		// closeIcon.style.background = "#3C3C3C";
+		// closeIcon.style.borderRadius = "50%";
+		// closeIcon.style.right = "4%";
+		// closeIcon.style.top = "2%";
+		// closeIcon.style.transform = "scale(0.5)";
+        closeIcon.style.display = "none";
+        closeBtn.appendChild(closeIcon);
+
+		
+
+
+        var timeLabel = document.createElement('div');
+        timeLabel.id = "TimeLabel";
+        timeLabel.style.margin = "22%";
+        timeLabel.style.color = "#FFFFFF";
+        timeLabel.style.fontSize = "28px";
+        timeLabel.style.fontFamily = "PingFangSC-Regular";
+        timeLabel.style.letterSpacing = "0";
+        timeLabel.style.textAlign = "center";
+        timeLabel.style.lineHeight = "34px";
+        timeLabel.innerHTML = "查看详情";
+        timeLabel.innerHTML = "4";
+        closeBtn.appendChild(timeLabel);
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		// jumpDiv.style.float = "left";
+		// jumpDiv.style.position = 
+		// jumpDiv.style.
+		// if(typeof styleObject == 'object'){
+		// 	for( var i in styleObject){
+		// 		eval( 'jumpDiv.style.' + i +' = styleObject[i];' );
+		// 	}
+		// }else{
+		// 	cc.error('参数不是个对象');
+		// 	return;
+		// }
+		// jumpDiv.innerHTML = "你是谁";
+
+
+
+    }
+</script>
+</head>
+<body>
+    <input type="button" value="添加" id="btnAdd" />
+    <div id="container"></div>
+
+
+    <div class="v-align">我的内容只能有一行。</div>
+
+
+</body>
+</html>
