@@ -1,4 +1,10 @@
 
+w3c学校，各种语言的学习资料
+https://www.w3cschool.cn/tutorial
+
+
+es6 - es11 新特性总结
+https://cloud.tencent.com/developer/article/1602432
 
 
 https://www.bookstack.cn/
