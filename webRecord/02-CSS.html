@@ -128,18 +128,154 @@ CSS文字文本样式
 </style>
 -----------------------
 2.font-family:字体种类
-<!-- <div style="font-family: Arial, 微软雅黑;"></div> -->
+<div style="font-family:Georgia, 'Times New Roman', Times, serif;"></div>
 
-可以写多个字体，浏览器中如果不支持第一个字体会顺序使用下一个字体
+可以写多个字体，浏览器中如果内容不适合第一个字体会顺序使用下一个字体
 
+
+css unicode字体
+在css中设置字体名称，是可以直接写中文，但是在文件编码(GB2312, UTF-8等)不匹配时会有乱码的错误
+
+解决方案1:使用英文来代替。
+    例如 font-family:"Microsoft Yahei"
+解决方案2:在CSS直接使用Unicode编码来写字体名称避免错误
+    例如 font-family:"\5FAE\8F6F\96C5\9ED1"; 表示设置字体为微软雅黑
+
+-----------------------
+3.font-weight 字体粗细
+<div style="font-weight: bold;"> 内容 </div>
+
+normal 是默认值 = 400
+bold 粗体 = 700
+
+-----------------------
+4.font-style 字体风格
+<div style="font-style: italic;"> 内容 </div>
+
+italic 是倾斜
+normal 是默认样式
+<i></i>和<em></em> 也是斜体样式
+
+-----------------------
+5.font:综合设置字体样式
+选择器 { font: font-style font-weight font-size/line-height font-family}
+必须严格按照属性顺序，不能更换顺序
+而且font-size 和 font-family 属性不能省略，否则不起作用
+
+例如:
+#id111 {
+    font: italic 700 20px "微软雅黑";
+}
+<div style="font: italic 700 20px '微软雅黑'";> 内容 </div>
+    
+---------------------------------------------
+CSS外观属性
+
+-----------------------
+1.color:颜色属性
+color 有三种表达方式
+1. color: red
+2. color: #FF0000
+3. color: rgb(255, 0, 0) 或者 rgb(100%, 0%, 0%)
+
+-----------------------
+2.text-align:文本水平对齐方式
+设置文本水平对齐
+left: 左对齐(默认值)
+right: 右对齐
+center: 居中对齐
+
+-----------------------
+3.line-height:行间距
+设置行与行之间的距离
+一般有三种单位 px em 百分比%
+<div style="line-height: 20px;"> 内容 </div>
+
+-----------------------
+4.text-indent:首行缩进
+设置文本的缩进
+单位一般使用 em、px、相对于浏览器窗口宽度的百分比%，允许使用负值
+1em就是一个字的宽度，如果是汉字的段落，就是一个汉字的宽度
+
+-----------------------
+5.text-decoration:文本的装饰
+通常用于修改链接的样式
+none: 默认，标准文本。取消下划线
+underline: 定义文本下的一条线，链接自带的
+overline: 定义文本上的一条线
+line-through: 定义穿过文本中间的一条线
+
+<div style="text-decoration: none;">内容</div>
+<div style="text-decoration: underline;">内容</div>
+<div style="text-decoration: overline;">内容</div>
+<div style="text-decoration: line-through;">内容</div>
 
 ---------------------------------------------
+emmet语法
+1.生成标签 输入标签名然后按tab键
+2.生成多个相同标签 标签名*数量   div*3
+3.父子级关系标签, 使用>     div>p
+4.兄弟级关系标签, 使用+     div+p
+5.生成带有类名或者id的标签 直接写 .类名 或者 #id名  .class1  #id1
+6.生成的标签有顺序 自增符号$ 从1开始
+例子:
+.demo$*3
+<div class="demo1"></div>
+<div class="demo2"></div>
+<div class="demo3"></div>
+
+div>p>tr*3
+<div>
+    <p>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+    </p>
+</div>
 
 ---------------------------------------------
+后代选择器
+用来选择元素或元素组的子孙后代，只要是后代，就会被选择出来
+父级 子级{属性:属性值;属性:属性值;}
+例如 
+<style>
+    .class1 h2{
+        color: blue;
+    }
+</style>
+<div class="class1">
+    <h3>内容
+        <h2>内容</h2>
+    </h3>
+</div>
 
----------------------------------------------
+-----------------------
+子元素选择器
+子元素选择器只能选择作为某元素子元素(亲儿子)的元素
+使用 > 号,来选择儿子元素
+父级>子级{属性:属性值;属性:属性值;}
+例如
+<style>
+    div>h3 {
+        color: blue;
+    }
+</style>
 
----------------------------------------------
+<div>
+    <h3>
+        <h2></h2>
+    </h3>
+</div>
+
+-----------------------
+交集选择器
+
+-----------------------
+
+-----------------------
+
+
+
 
 ---------------------------------------------
 
