@@ -1,61 +1,129 @@
 
 
 
-function tearNumber(num){
-    let array = [];
-    while(num){
-        let i = num%10;
-        array.push(i);
-        num = Math.floor(num/10);
-    }
-    array.sort();
-    return array;
-}
-
-function compairArray(array1, array2){
-    if(array1.length == array2.length){
-        for(let i = 0; i < array1.length; i++){
-            if(array1[i] != array2[i]){
-                return false;
+let judgeCanCombineHouse = function(locationInfo) {
+    let houseLevelArray = [];
+    let houseInfoArray = {};
+    let weakGuideHouseResult = {
+        existWeakGuide: false,
+        weakGuideHandHouseInfo: [],
+        everyLevelHouseInfo:{}
+    };
+    for (let attr in locationInfo) {
+        let houseInfo = locationInfo[attr];
+        if (houseInfo !== null && houseInfo !== undefined) {
+            if(houseInfoArray[houseInfo.level]) {
+            } else {
+                houseInfoArray[houseInfo.level] = [];
+                houseLevelArray.push(houseInfo.level);
             }
-        }
-        return true;
-    } else {
-        return false;
-    }
-}
-
-let fun = function (){
-    let i = 100000;
-    let maxNumber = 999999;
-    let array = [];
-    for(; i < maxNumber; i++){
-        let i2 = i*2;
-        let i3 = i*3;
-        let i4 = i*4;
-        let i5 = i*5;
-        let i6 = i*6;
-        if(i2 < maxNumber && i3 < maxNumber && i4 < maxNumber && i5 < maxNumber && i6 < maxNumber){
-
-            if(compairArray(tearNumber(i), tearNumber(i2)) && 
-            compairArray(tearNumber(i2), tearNumber(i3)) &&
-            compairArray(tearNumber(i3), tearNumber(i4)) &&
-            compairArray(tearNumber(i4), tearNumber(i5)) &&
-            compairArray(tearNumber(i5), tearNumber(i6))
-            ){
-                array.push(i);
-            }
-            // return i;
+            houseInfoArray[houseInfo.level].push({index: houseInfo.locationIndex, level:houseInfo.level});
         }
     }
-    return array;
+    
+
+    houseLevelArray.sort();
+    
+    let weakDestHouseInfo = [];
+    for (const level of houseLevelArray) {
+        houseInfoArray[level].sort((a, b) => {
+            return a.index < b.index;
+        });
+        if(houseInfoArray[level].length >= 2){
+            //说明存在弱引导手势的房子
+            if(weakDestHouseInfo.length === 0) {
+                weakDestHouseInfo = houseInfoArray[level];
+            }
+        }
+    }
+
+    if(weakDestHouseInfo.length >= 2) {
+        weakGuideHouseResult.existWeakGuide = true;
+        //筛选距离最近的两个房子
+        let minIndex = 0;
+        let minDistance = -1;
+        for(let i = 0; i < weakDestHouseInfo.length - 1; i++) {
+            let curDistance = weakDestHouseInfo[i + 1].index - weakDestHouseInfo[i].index;
+            if(minDistance === -1 || curDistance < minDistance) {
+                minDistance = curDistance;
+                minIndex = i;
+            }
+        }
+        weakGuideHouseResult.weakGuideHandHouseInfo = [weakDestHouseInfo[minIndex], weakDestHouseInfo[minIndex + 1]];
+    }
+    weakGuideHouseResult.everyLevelHouseInfo = houseInfoArray;
+
+    return weakGuideHouseResult;
+}
+
+let test = function() {
+    let locationInfo = {
+		"11": null,
+		"1": {
+			"coinSpeed": "10",
+			"img": null,
+			"level": 2,
+			"locationIndex": 1,
+			"name": null,
+			"ore": null,
+			"oreValue": null,
+			"state": 0,
+			"type": 1
+		},
+		"12": {
+			"coinSpeed": "10",
+			"img": null,
+			"level": 2,
+			"locationIndex": 12,
+			"name": null,
+			"ore": null,
+			"oreValue": null,
+			"state": 0,
+			"type": 1
+		},
+		"2": null,
+		"3": {
+			"coinSpeed": "10",
+			"img": null,
+			"level": 1,
+			"locationIndex": 3,
+			"name": null,
+			"ore": null,
+			"oreValue": null,
+			"state": 0,
+			"type": 1
+		},
+		"4": {
+			"coinSpeed": "10",
+			"img": null,
+			"level": 1,
+			"locationIndex": 4,
+			"name": null,
+			"ore": null,
+			"oreValue": null,
+			"state": 0,
+			"type": 1
+		},
+		"5": null,
+		"6": null,
+		"7": null,
+		"8": null,
+		"9": null,
+		"10": {
+			"coinSpeed": "10",
+			"img": null,
+			"level": 2,
+			"locationIndex": 10,
+			"name": null,
+			"ore": null,
+			"oreValue": null,
+			"state": 0,
+			"type": 1
+		},
+    };
+    let weakGuideHouseResult = judgeCanCombineHouse(locationInfo);
+    console.log(JSON.stringify(weakGuideHouseResult));
 }
 
 
-
-let result = fun();
-for(let number of result){
-    console.log(number + "  ");
-}
-
-// console.log(compairArray(tearNumber(100011), tearNumber(110101)));
+test();

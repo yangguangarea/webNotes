@@ -269,8 +269,45 @@ div>p>tr*3
 
 -----------------------
 交集选择器
+<style>
+    /* 标签名.类名 */
+</style>
+中间不能有空格
+例如
+<style>
+    p.red {
+        color: red;
+    }
+</style>
+<p class="red">内容</p>
+<p class="red">内容</p>
+<div class="red">内容</div>
+<p class="blue">内容</p>
 
 -----------------------
+并集选择器
+<style>
+    标签名,
+    .类名,
+    #id名 {
+        属性
+    }
+</style>
+用“,”分割需要使用 style 的标签或者属性，通常用于集体声明
+例如
+<style>
+    .red,
+    #id1 {
+        color: red;
+    }
+</style>
+
+<div>内容</div>
+<div>内容</div>
+<div>内容</div>
+<div class="red">内容</div>
+<div id="id1">内容</div>
+
 
 -----------------------
 
