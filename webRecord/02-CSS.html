@@ -398,20 +398,74 @@ h1, h2, h3, h4, h5, h6, dt等文字类块级标签，里边不能放其他块级
 块转行内: display:inline
 行内转块: display:block
 块、行内元素转换为行内块: display:inline-block
-
------------------------
-
-
------------------------
-
-
-
-
-
+<style>
+    div {
+        display: inline;
+        display: inline-block;
+        display: block;
+    }
+</style>
 ---------------------------------------------
-
+单行文本垂直居中
+文字的行高等于盒子的高度
+行高 = 上距离 + 内容高度 + 下距离
+上距离 = 下距离
+所以在行高中，文字本身是居中的
+文字的行高 = 盒子的高度 时，文字就在盒子中垂直居中了
+<style>
+    div {
+        line-height: 50px;
+        height: 50px;
+    }
+</style>
+行高 > 盒子高度 文字会偏下
+行高 < 盒子高度 文字会偏上
 ---------------------------------------------
+CSS背景(background)
+背景是放在盒子的底部的
+-----------------------
+background-color 背景颜色
+<style>
+    div {
+        background-color: transparent;背景色透明，不给默认透明
+        background-color: pink; 背景指定颜色
+    }
+</style>
+-----------------------
+background-image 背景图片
+<style>
+    div {
+        background-image: none; 
+        background-image: url(绝对路径或相对路径,不带引号);
+    }
+</style>
+-----------------------
+background-repeat 背景平铺
+<style>
+    div {
+        background-repeat: repeat; 默认平铺
+        background-repeat: no-repeat; 背景不平铺
+        background-repeat: repeat-x; 背景横向平铺
+        background-repeat: repeat-y; 背景纵向平铺
+    }
+</style>
+-----------------------
+background-position 背景位置
+<style>
+    div {
+        background-position: length || length; 
+        background-position: position | position; 
+        /* background-position: right top; 图片位于右上角 */
+    }
+</style>
+length: 百分数 | 数字和长度单位构成的长度
+position: top | center | bottom | left | right 方位名词
 
+使用 background-position 必须先指定 background-image 属性
+如果只指定了一个方位值，另一个默认居中
+如果只指定了一个数值，则x为数值，y为默认居中
+
+网页中 原点是左上角，y轴往下延伸
 ---------------------------------------------
 
 ---------------------------------------------
