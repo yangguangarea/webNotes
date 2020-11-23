@@ -524,7 +524,7 @@ CSS优先级
 定义CSS样式时，经常出现两个或更多规则应用在同一元素上，此时
     1.选择器相同，执行层叠性
     2.选择器不同，就会出现优先级问题
-
+-----------------------
 权重计算公式
 CSS Specificity（特殊性）
 
@@ -544,9 +544,117 @@ CSS Specificity（特殊性）
 <div class="one" id="two" style="color: red;">内容</div>
 标签显示为绿色
 当属性后边加!important，权重是最高的
+-----------------------
+权重叠加
+属性!important      > 无穷大
+行内样式 style=""    > 1000
+id                  > 0100
+类，伪类             > 0010
+标签选择器           > 0001
+继承或者*            > 0000
+
+
+继承的权重是0
+如果权重相同，则根据层叠性，就近原则
+
+例如
+此时"内容"显示为 蓝色
+<style>
+    /* 权重 为 0010 + 0001 = 0011 */
+    .nav a {
+        color: red;
+    }
+    /* 权重 为 0010 */
+    .first {
+        color: pink;
+    }
+    /* 权重 0010 + 0010 = 0020 */
+    .nav .first {
+        color: blue;
+    }
+</style>
+
+<div class="nav">
+    <a href="#" class="first">内容</a>
+</div>
+
+---------------------------------------------
+盒子模型(CSS重点)
+
+盒子模型四部分组成 {
+    外边距（margin）    盒子与盒子之间的距离是外边距
+    边框（border）  盒子的厚度称为盒子的边框
+    内边距（padding）   盒子内容与边框的距离是内边距
+    元素的内容
+}
+---------------------------------------------
+边框(border)
+<style>
+    div {
+        border-width: 10px; 边框粗细
+        border-style:solid; 边框样式 默认none，solid实线，dashed 虚线，dotted 点线
+        border-color: brown; 边框颜色
+    }
+</style>
+
+边框综合设置
+<style>
+    div {
+        border: brown solid 2px;
+    }
+</style>
+-----------------------
+盒子边框写法
+
+<style>
+    div {
+        /* 上边框 */
+        border-top-style:solid;
+        border-top-width: 2px;
+        /* 下边框 */
+        border-bottom-style:solid;
+        border-bottom-width: 2px;
+        /* 左边框 */
+        border-left-style:solid;
+        border-left-width: 2px;
+        /* 右边框 */
+        border-right-style:solid;
+        border-right-width: 2px;
+    }
+</style>
+-----------------------
+表格的细线边框
+通过表格的cellspacing="0",将单元格之间的距离设置为0
+但是这时，单元格之间的边框会出现重叠，使边框变粗
+通过css属性
+<style>
+    table {
+        border-collapse: collapse; 表示相邻边框合并在一起
+    }
+</style>
+
+---------------------------------------------
+内边距(padding)
+内边距指 边框与内容之间的距离
+<style>
+    div {
+        /* padding-left: 10px; 左内边距
+        padding-right: 10px; 右内边距
+        padding-top: 10px; 上内边距
+        padding-bottom: 10px; 下内边距 */
+        padding: 10px 5px; 上下  左右
+        padding: 10px 5px 8px; 上 左右 下
+        padding: 10px 5px 8px 3px;上 右 下 左
+    }
+</style>
+当给盒子指定padding值之后，1.内容和边框有了距离，是内边距  2.盒子会变大
+-----------------------
+内盒尺寸计算(元素实际大小)
 
 
 
+
+-----------------------
 
 ---------------------------------------------
 

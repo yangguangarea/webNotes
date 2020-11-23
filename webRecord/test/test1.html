@@ -95,12 +95,8 @@
         background-color: orange;
         color: yellow;
     }
-    div {
-        /* background-color: transparent;背景色透明，不给默认透明 */
-        /* background-color: pink; 背景指定颜色 */
-        /* background-image: none;  */
-        /* background-image: url(绝对路径或相对路径,不带引号); */
-    }
+    
+    
 </style>
 
 
@@ -224,6 +220,67 @@
         <a href="#"></a>
         <a href="#"></a>
         <a href="#"></a>
+    </div>
+
+
+    <div class="border" style="border-width: 10px; border-style: ridge;border-color: blue; background-color: yellow;">内容</div>
+
+
+
+
+
+    <style>
+        .pad {
+            border: solid 1px green;
+            background-color: red;
+        }
+        .padding1 {
+            padding-left: 5px;
+            
+        }
+        .padding2 {
+            padding: 25px 15px;
+        }
+        .padding3 {
+            padding: 12px 10px 0px 25px;
+        }
+    </style>
+    <div class="padding1 pad">内容1</div>
+
+    <div class="padding2 pad">内容2</div>
+
+    <div class="padding3 pad">内容3</div>
+
+    
+    <style>
+        .navbar {
+            width: 1000px;
+            height: 200px;
+            border-top: orange 5px solid;
+            background-color: white;
+        }
+        .navbar .bar {
+            padding: 10px 10px;
+            background-color: white;
+            font-size: 16px;
+            text-align: center;
+            color: black;
+
+        }
+        .navbar .bar:hover {
+            background-color: gray;
+            color: black;
+
+        }
+    </style>
+
+    <div class="navbar">
+        <span class="bar">设为首页</span>
+        <span class="bar">手机新浪网</span>
+        <span class="bar">移动客户端</span>
+        <span class="bar">博客</span>
+        <span class="bar">微博</span>
+        <span class="bar">关注我</span>
     </div>
 
 </body>
