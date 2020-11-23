@@ -466,7 +466,87 @@ position: top | center | bottom | left | right 方位名词
 如果只指定了一个数值，则x为数值，y为默认居中
 
 网页中 原点是左上角，y轴往下延伸
+
+
+-----------------------
+一般超大背景图使用这种布局
+<style>
+    body {
+        background-image: url(路径);
+        background-repeat: no-repeat;
+        background-position: center top;
+        
+    }
+</style>
+
+-----------------------
+background-attachment 背景固定;
+正常滚动网页的时候背景也会滚动，可以固定住不进行滚动
+<style>
+    div {
+        background-attachment: fixed; 固定
+        background-attachment: scroll; 滚动
+    }
+</style>
+-----------------------
+背景简写
+background 属性值没有固定书写 一般按如下顺序
+background: 背景颜色 背景图片地址 背景平铺 背景滚动 背景位置
+<style>
+    div {
+        background: pink url() no-repeat scroll left center;
+    }
+</style>
 ---------------------------------------------
+背景透明 CSS3 
+指定背景颜色的 alpha 介于 0-1之间
+低于ie9版本不支持
+<style>
+    div {
+        background: rgba(red, green, blue, alpha);
+    }
+</style>
+
+---------------------------------------------
+CSS 三大特性
+-----------------------
+CSS层叠式
+层叠式是指多种CSS样式的叠加
+样式冲突遵循就近原则，哪个样式离结构近，就执行哪个样式
+-----------------------
+CSS继承性
+子标签会继承父标签的某些样式，如文本颜色和字号
+想要设置一个可继承的属性，只需将它应用于父元素即可
+
+子元素可以继承父元素的样式（text-, font-, line- 这些元素开头的可以继承， 以及color属性）
+-----------------------
+CSS优先级
+定义CSS样式时，经常出现两个或更多规则应用在同一元素上，此时
+    1.选择器相同，执行层叠性
+    2.选择器不同，就会出现优先级问题
+
+权重计算公式
+CSS Specificity（特殊性）
+
+属性!important > 行内样式 style="" > id > 类，伪类 > 标签选择器 > 继承或者*
+<style>
+    div {
+        color: green!important;
+    }
+    .id {
+        color: blue;
+    }
+    #two {
+        color: orange;
+    }
+</style>
+
+<div class="one" id="two" style="color: red;">内容</div>
+标签显示为绿色
+当属性后边加!important，权重是最高的
+
+
+
 
 ---------------------------------------------
 
