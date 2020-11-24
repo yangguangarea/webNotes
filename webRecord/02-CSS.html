@@ -648,13 +648,229 @@ id                  > 0100
     }
 </style>
 当给盒子指定padding值之后，1.内容和边框有了距离，是内边距  2.盒子会变大
+
+如果没有给一个盒子指定宽度，此时，如果给这个盒子指定padding，则不会撑开盒子
 -----------------------
 内盒尺寸计算(元素实际大小)
+盒子实际大小 = 内容的宽高 + 内边距 + 边框
+宽度
+    elementWidth = contentWidth + padding + border
+高度
+    elementHeight = contentHeight + padding + border
 
+---------------------------------------------
+外边距(margin)
+margin属性用于设置外边距，margin就是控制盒子与盒子之间的距离
+<style>
+    div {
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin: auto;
+        /* margin: 上 右 下 左; */
+    }
+</style>
+-----------------------
+外边距实现盒子居中
+可以让一个盒子实现水平居中，需要满足以下两个条件：
+    1.必须是块级元素
+    2.盒子必须制定了宽度（width）
+然后就给左右的外边距都设置为auto，就可以使块级元素水平居中
+
+实际工作中常用这种方式进行网页布局
+<style>
+    .header {
+        width: 960px;
+/* 写法一 */
+        margin:0 auto; 上下外边距0，左右外边距自动
+/* 写法二 */
+        margin: auto;
+/* 写法三 */
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+-----------------------
+文字居中和盒子居中区别
+1.文字水平居中是 text-align: center，而且还可以让行内元素和行内块居中对齐
+-----------------------
+插入图片和背景图片的区别
+1.插入图片 我们用的最多 比如产品展示类 移动位置只能靠盒模型 padding margin
+2.背景图片 一般用于小图标背景 或者超大背景图片 背景图片 只能通过 background-position
+<style>
+    img {
+        width: 200px;
+        height: 200px;
+        margin-top: 30px;
+        margin-left: 50px;
+    }
+    div {
+        background-position: 10px;
+    }
+</style>
+-----------------------
+清除元素的默认内外边距
+<style>
+    * {
+        padding:0; /* 清除内边距 */
+        margin: 0; /* 清除外边距 */
+    }
+</style>
+
+行内元素为了兼容性，尽量只设置左右边距，不要设置上下边距
+-----------------------
+外边距合并
+(1)相邻块元素垂直外边距的合并
+当上下相邻的两个块元素相遇时，如果上边元素有margin-bottom
+下边元素有margin-top ，这时两个元素的垂直间距不是 margin-bottom + margin-top
+而是取两个间距中的较大值
+
+解决方法，尽量只给一个盒子添加margin值
+例如
+<style>
+    .topEle {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 100px;
+    }
+    .bottomEle {
+        width: 100px;
+        height: 100px;
+        margin-top: 50px;
+    }
+</style>
+<div class="topEle"></div>
+<div class="bottomEle"></div>
+此时两个div的距离是100px 而不是150px
+-----------------------
+(2)嵌套块元素垂直外边距的合并（塌陷）
+对于两个嵌套关系的块元素，如果父元素没有上内边距及边框
+父元素的上外边距会与子元素的上外边距发生合并
+合并后的外边距为两者中的较大者
+
+解决方案
+1.为父元素定义上边框
+2.为父元素定义上内边距
+3.可以为父元素添加 overflow:hidden
+---------------------------------------------
+盒子模型布局稳定性
+根据稳定性来分，建议如下
+按照 优先使用 宽度（width） 其次，使用内边距（padding），再次 外边距（margin）
+width > padding > margin
+原因：
+    1.margin 会有外边距合并，ie6下面margin加倍的bug
+    2.padding会影响盒子大小，需要进行加减计算
+    3.width 没有问题，经常使用宽度剩余法，高度剩余法来做
+
+
+<style>
+    div {
+        background: url(djiwdj);
+        padding: 30px 15px
+    }
+    li {
+        border-bottom: dashed;
+        
+    }
+</style>
+---------------------------------------------
+去掉列表默认样式
+<style>
+    li {
+        list-style: none;
+    }
+</style>
+
+---------------------------------------------
+圆角边框(CSS3)
+<style>
+    div {
+        border-radius: 10px; 每一个值可以为数值或百分比形式
+        border-radius: 50%; 此时正方形变成了圆
+        border-radius: 5% 1% 1% 5%; 左上角 右上角 右下角 左下角
+    }
+</style>
+
+
+<style>
+    .radius {
+        width: 100px;
+        height: 200px;
+        border: 1px solid black;
+        border-radius: 5% 1% 1% 5%;
+    }
+</style>
+<div class="radius">内容</div>
+-----------------------
+盒子阴影(CSS3)
+h-shadow 水平阴影 
+v-shadow 垂直阴影 
+blur 模糊距离（虚实） 
+spread 阴影尺寸（影子大小） 
+color 阴影颜色 
+inset 内/外阴影
+
+<style>
+    div {
+        box-shadow: 5px 5px 5px 5px brown;
+    }
+</style>
+---------------------------------------------
+CSS布局的三种机制 {
+    普通流(标准流) {
+        块级元素会独占一行，从上向下顺序排列
+            常用元素：div hr p h1-h6 ul ol dl form table
+        行内元素会按照顺序，从左到右顺序排列，碰到父元素边缘自动换行
+            常用元素：span a i em 等
+    }
+    浮动 {
+        让盒子从普通流中浮起来，主要作用让多个块级盒子一行显示
+    }
+    定位 {
+        将盒子定在浏览器的某一个位置
+    }
+}
+ 
+-----------------------
+浮动(float)
+作用 {
+    1.让多个盒子(div)水平排列成一行，使得浮动成为布局的重要手段
+    2.可以实现盒子的左右对齐等等
+    3.浮动最早是用来控制图片，实现文字环绕图片的效果
+}
+
+语法：
+
+<style>
+    div {
+        /* float: 属性值; */
+        float: left; 元素向左浮动
+        float: right; 元素向右浮动
+        float: none; 默认值 不浮动
+    }
+</style>
+
+float属性会改变元素display属性
+任何元素都可以浮动，浮动元素会生成一个块级框，而不论它本身是何种元素，生成的块级框类似行内块
+
+-----------------------
+浮动和标准流的父盒子搭配
+浮动会影响下边的标准流元素，此时，要给浮动的元素添加一个标准流的父亲，减少对其他标准流元素的影响
 
 
 
 -----------------------
+
+-----------------------
+
+
+
+---------------------------------------------
+
+---------------------------------------------
+
+---------------------------------------------
 
 ---------------------------------------------
 
