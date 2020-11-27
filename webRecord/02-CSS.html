@@ -858,20 +858,125 @@ float属性会改变元素display属性
 浮动和标准流的父盒子搭配
 浮动会影响下边的标准流元素，此时，要给浮动的元素添加一个标准流的父亲，减少对其他标准流元素的影响
 
+-----------------------
+浮动元素与父盒子的关系
+不会与父盒子的边框重叠，也不会超过父盒子的内边距
+
+-----------------------
+浮动元素与兄弟盒子的关系
+在一个父级盒子中，如果前一个兄弟盒子是：
+    浮动的，那么当前盒子会与前一个盒子的顶部对齐
+    普通流的，那么当前盒子会显示在前一个兄弟盒子的下方
+浮动只会影响当前的或者是后面的盒子，不会影响前面的标准流
+
+建议：如果一个盒子里有多个子盒子，如果其中一个盒子浮动了，其他兄弟也应该浮动
+
+---------------------------------------------
+清除浮动
+
+为什么要清除浮动
+因为父级盒子很多情况下，不方便给高度，但是子盒子浮动就不占有位置，
+最后父级盒子高度为0，就影响了下面的标准流盒子
+
+-----------------------
+清除浮动的方法
+在CSS中，clear属性用于清除浮动
+语法： 
+<style>
+    选择器 {
+        clear: 属性值;
+        clear: left; 不允许左侧有浮动元素(清除左侧浮动的影响)
+        clear: right; 不允许右侧有浮动元素(清除右侧浮动的影响)
+        clear: both; 同时清除左右两侧浮动的影响
+    }
+</style>
+-----------------------
+1.额外标签法（隔墙法）
+通过在浮动元数据末尾添加一个空的标签
+例如 <div style="clear: both;"></div>，或者其他标签br等亦可
+优点：通俗易懂，书写方便
+缺点：添加许多无意义的标签，结构化较差
+
+-----------------------
+2.父级添加overflow属性方法
+可以给父级添加: overflow 为 hidden | auto | scroll 都可以实现
+优点：代码简介
+缺点：内容增多时候容易造成不会自动换行导致内容被隐藏掉，无法显示需要溢出的元素
+
+overflow hidden 溢出隐藏
+-----------------------
+3.使用after伪元素清除浮动
+:after 方式为空元素额外标签法的升级版，好处是不用单独加标签了
+
+<style>
+    .clearfix:after {
+        content: "";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    .clearfix {
+        *zoom: 1; /*IE6,7专门清除浮动的样式*/
+    }
+</style>
+
+优点：符合闭合浮动思想，结构语义化正确
+缺点：由于IE6-7不支持 :after, 使用zoom:1 触发 hasLayout
+-----------------------
+4.使用双伪元素清除浮动
+
+<style>
+    .clearfix:before, .clearfix:after {
+        content: "";
+        display: table;
+    }
+    .clearfix:after {
+        clear: both;
+    }
+    .cleafix {
+        *zoom: 1;
+    }
+</style>
+
+---------------------------------------------
+CSS属性书写顺序
+1.布局定位属性: display | position | float | clear | visibility | overflow
+2.自身属性: width | height | margin | padding | border | background
+3.文本属性: color | font | text-decoration | text-align | vertical-align | 
+    white-space | break-word
+4.其他属性(CSS3): content | cursor | border-radius | box-shadow | text-shadow | 
+    background:linear-gradient
+
+例如:
+<style>
+    .jdc {
+        display: block;
+        position: relative;
+        float: left;
+        width: 10px;
+        height: 0;
+        margin: unset;
+        padding: unset;
+        font-family: unset;
+        color: unset;
+        background: unset;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -o-border-radius: 10px;
+        border-radius: 10px;
+    }
+</style>
+
+---------------------------------------------
+
 
 
 -----------------------
 
------------------------
-
-
 
 ---------------------------------------------
-
----------------------------------------------
-
----------------------------------------------
-
+ 
 ---------------------------------------------
 
 ---------------------------------------------
