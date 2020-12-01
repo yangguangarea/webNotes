@@ -1142,8 +1142,8 @@ vertical-align 垂直对齐
 vertical-align 垂直对齐，只针对于行内元素或者行内块元素
 <style>
     div {
-        vertical-align: baseline;/* 默认是图片和文字的基线对齐 */
-        vertical-align: top;/* 顶部对齐 */
+        vertical-align: baseline;/* 默认是图片的基线和文字的基线对齐 */
+        vertical-align: top;/* 图片的顶部和文字的顶部对齐 */
         vertical-align: middle;/* 垂直居中 */
         vertical-align: bottom;/* 底部对齐 */
     }
@@ -1151,7 +1151,122 @@ vertical-align 垂直对齐，只针对于行内元素或者行内块元素
 通常用来控制图片/表单与文字的对齐
 
 ---------------------------------------------
+去除图片底侧空白缝隙
+父盒子由图片撑开，图片下面会多出缝隙
+原因：
+    图片或表单等行内块元素，它的底线会和父级盒子的基线对齐
+    就是图片底侧会有一个空白缝隙
+解决的办法
+    给img vertical-align:middle | top等等。让图片不要和基线对齐
+    给img 添加 display:block; 转换为块级元素就不会有问题了
+
+---------------------------------------------
+溢出的文字省略号显示
+1. 先强制一行内显示文本
+    white-space: nowrap;
+2. 超出的部分隐藏
+    overflow:hidden;
+3. 文字用省略号替代超出的部分
+    text-overflow: ellipsis;
+
+-----------------------
+white-space
+设置或检索对象的文本显示方式。通常用于强制一行显示内容
+<style>
+    div {
+        white-space: normal; /* 默认处理方式 */
+        white-space: nowrap; /* 强制在同一行内显示所有文本，直到文本结束或者遭遇br标签对象才换行 */
+    }
+</style>
+-----------------------
+text-overflow 文字溢出
+设置或检索是否使用一个省略标记(...)标示对象内文本的溢出
+<style>
+    div {
+        text-overflow: clip;/* 直接裁剪 */
+        text-overflow: ellipsis; /* 文本溢出时显示省略标记 */
+    }
+</style>
+---------------------------------------------
+CSS精灵技术(css sprite, css雪碧)
+其实就是打图集
+CSS精灵技术主要针对于背景图片，插入的图片img是不需要这个技术的
+1.精确测量，每个小背景图的大小和位置
+2.给盒子指定小背景图时，背景定位基本都是负值
+
+使用 background-position 来进行精准的定位
+
+
+-----------------------
+CSS滑动门技术(其实类似九宫格)
+核心技术就是利用CSS精灵（主要是背景位置）和盒子padding撑开宽度，适应不同字数的导航栏
+
+总结
+1. a 设置 背景左侧，padding撑开合适宽度
+2. span设置背景右侧，padding撑开合适宽度，剩下由文字继续撑开宽度
+3. 之所以a包含span就是因为 整个导航都是可以点击的
+---------------------------------------------
+margin负值之美
+
+1.负边距+定位：水平垂直居中
+一个绝对定位的盒子，利用父级盒子的50%，然后往左（上）走自己宽度的一半，就可以实现水平垂直居中
+-----------------------
+压住盒子相邻边框
+<style>
+    div {
+        float: left;
+        width: 100px;
+        height: 100px;
+        border: red solid 1px;
+        margin-left: -1px;
+        margin-top: -1px;
+    }
+</style>
+
+利用margin-left: -1px; 就可以让相邻的盒子盖到左边的盒子上
+---------------------------------------------
+CSS三角形之美
+利用css边框模拟三角效果
+<style>
+    div {
+        width: 0;
+        height: 0;
+        border-top: solid 1px blue;
+        border-bottom: solid 1px red;
+        border-left: solid 1px green;
+        border-right: solid 1px yellow;
+    }
+</style>
+1.宽度高度都为0
+2.4个边框都要写，只保留需要的边框颜色，其余的都改为transparent透明
+3.为了照顾兼容性，加上 font-size:0; line-height:0;
+
+<style>
+    div {
+        width: 0;
+        height: 0;
+        font-size: 0;
+        line-height: 0;
+        border-style: solid;
+        border-width: 10px;
+        border-color: red transparent transparent transparent;
+    }
+</style>
+
+
+-----------------------
+
 
 
 
 ---------------------------------------------
+
+---------------------------------------------
+
+
+
+-----------------------
+
+-----------------------
+
+-----------------------
