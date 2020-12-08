@@ -9,7 +9,7 @@ https://cloud.tencent.com/developer/article/1602432
 
 https://www.bookstack.cn/
 
-//web开发的文档网站，有教学，有api
+//微软web开发的文档网站，有教学，有api
 https://developer.mozilla.org/zh-CN/docs/Learn
 
 w3c
