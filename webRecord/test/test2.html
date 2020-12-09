@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- <script src="test2.css"></script> -->
+    <link rel="stylesheet" type="text/css"  href="test2.css">
 </head>
 <body>
     <script>
@@ -11,6 +13,103 @@
         // console.log(bbb);
     </script>
     <script src="./test2.js"></script>
+
+    <header>你是谁</header>
+    <header>你是2</header>
+
+    <form action="">
+        <input type="email"> 限制用户输入必须为 Email 类型 <br>
+        <input type="url"> 限制用户输入必须为 url 类型 <br>
+        <input type="date"> 限制用户输入必须为 日期 类型 <br>
+        <input type="time"> 限制用户输入必须为 时间 类型 <br>
+        <input type="month"> 限制用户输入必须为 月 类型 <br>
+        <input type="week"> 限制用户输入必须为 周 类型 <br>
+        <input type="number"> 限制用户输入必须为 数字 类型 <br>
+        <input type="tel"> 手机号码 <br>
+        <input type="search"> 搜索框 <br>
+        <input type="color"> 生成一个颜色选择表单 <br>
+
+        <input type="text" name="user" autocomplete="off">
+        <input type="submit" value="提交">
+    </form>
+
+
+    <style>
+        button[disabled] {
+            color: blue;
+        }
+        button[disabled="disabled"] {
+        color: pink;
+    }
+    </style>
+    <button>按钮</button>
+    <button disabled="disabled">按钮</button>
+
+
+
+    <style>
+        /* 将 ul 中的第一个li选择出来 */
+        /* ul li:first-child {
+            color: pink;
+        }
+        ul li:last-child {
+            font-size: 20px;
+        }
+        ul li:nth-child(2) {
+            background-color: green;
+        }
+        ul li:nth-child(even) {
+            background-color: red;
+        }
+        ul li:nth-child(-n+5) {
+            background-color: green;
+        } */
+        ul :nth-child(2) {
+            background-color: pink;
+        }
+    </style>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    
+    <style>
+        /* 选择的元素既是span 又是div下的第一个元素，所以并不会选择出元素来 */
+        div span:nth-child(2) {
+            background-color:pink;
+        }
+    </style>
+    <div>
+        <p>ppp</p>
+        <span>ssss</span>
+        <span>ssss</span>
+        <span>ssss</span>
+    </div>
+
+    <style>
+        .weilei {
+            width: 100px;
+            height: 100px;
+            border: black 1px solid;
+        }
+        .weilei::before {
+            background-color: pink;
+            content: "前面";
+        }
+        .weilei::after {
+            background-color: green;
+            content: "后面";
+        }
+    </style>
+    
+    <div class="weilei">内容</div>
 
 </body>
 </html>

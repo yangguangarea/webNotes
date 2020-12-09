@@ -1,7 +1,5 @@
 
 
-
-
 ---------------------------------------------
 VScode插件
     Chinese(Simplified) Language  中文语言包插件
@@ -19,6 +17,263 @@ h5新增语义化标签
 <aside></aside>侧边栏标签
 <footer></footer>尾部标签
 
+注意:这种语义化标准主要针对搜索引擎
+    这些新标签页面中可以使用多次的
+    在ie9中，需要把这些元素转换为块级元素
+    在ie9中，这些标签默认是行内元素，所以加上display:block
+
+---------------------------------------------
+多媒体标签
+音频 <audio src=""></audio>
+视频 <video src=""></video>
+
+-----------------------
+<audio src=""></audio>
+HTML5在不使用插件的情况下可以原生的支持音频格式文件的播放
+
+支持音频格式
+1.ogg
+2.mp3
+3.wav
+
+<body>
+    <audio src="xxx.mp3" controls="controls"></audio>
+</body>
+
+<audio>音频标签常见属性
+    <audio autoplay="autoplay"></audio> 如果出现该属性，音频就绪后马上播放 谷歌把autoplay属性禁用了
+    <audio controls="controls"></audio> 如果出现该属性，显示控制控件
+    <audio loop="loop"></audio> 如果出现该属性，循环播放
+    <audio src="url路径"></audio> 要播放的音频文件的url
+
+因为不同浏览器支持不同的格式，所以解决方案是准备多个格式的音频文件
+<audio>
+    <source src="xxx.mp3" type="audio/mpeg">
+    <source src="xxx.ogg" type="audio/ogg">
+    您的浏览器暂不支持audio标签
+</audio>
+
+-----------------------
+<video src=""></video>
+
+支持视频格式
+1.ogg
+2.mpeg4
+3.WebM
+
+<video>视频标签常见属性
+    <video autoplay="autoplay"></video> 音频就绪后马上播放 谷歌把autoplay属性禁用了
+    <video controls="controls"></video> 显示控制控件
+    <video width="像素"></video> 设置播放器宽度
+    <video height="像素"></video> 设置播放器高度
+    <video preload="auto || none"></video>  是否预加载视频，auto预加载，none不预加载
+    <video poster="imgurl"></video> 加载等待的画面图片
+    <video muted="muted"></video> 静音播放
+    <video loop="loop"></video> 循环播放
+    <video src="url路径"></video> 要播放的音频文件的url
+    
+谷歌默认把自动播放功能禁用了，解决方案是把视频静音muted
+<video src="" controls="controls"></video>
+<video width="300" controls="controls">
+    <source src="xxx.mp4" type="video/mp4">
+    <source src="xxx.ogg" type="video/ogg">
+    您的浏览器暂不支持video标签
+</video>
+
+---------------------------------------------
+h5新增input表单、表单属性
+<input type="email"> 限制用户输入必须为 Email 类型
+<input type="url"> 限制用户输入必须为 url 类型
+<input type="date"> 限制用户输入必须为 日期 类型
+<input type="time"> 限制用户输入必须为 时间 类型
+<input type="month"> 限制用户输入必须为 月 类型
+<input type="week"> 限制用户输入必须为 周 类型
+<input type="number"> 限制用户输入必须为 数字 类型
+<input type="tel"> 手机号码
+<input type="search"> 搜索框
+<input type="color"> 生成一个颜色选择表单
+
+-----------------------
+<input type="text" required="required"> 表单内容必须填写，不能为空
+<input type="text" placeholder="提示文本(占位符)"> 表单的提示信息，存在默认设置将不显示
+<input type="text" autofocus="autofocus"> 自动聚焦属性，页面加载完自动聚焦到指定表单
+
+<input type="text" name="user" autocomplete="on | off">
+<input type="submit" value="提交">
+autocomplete 当用户开始输入内容的时候，浏览器根据之前输入过的值，会显示出填写过的值的选项
+默认是on选项，关闭需要 autocomplete="off"
+想要有填写选项这种效果
+    1.需要在表单内同时加上name属性
+    2.提交过表单
+<input type="file" multiple="multiple"> 可以多选文件提交
+
+---------------------------------------------
+CSS3选择器
+
+1属性选择器
+<style>
+    /* 标签名[属性] {
+        
+    } */
+    /* 标签名[属性="属性值"] {
+
+    } */
+    /* 标签名[属性^="属性值"] {
+
+    } */
+</style>
+属性选择器的权重是10
+
+E[att] 选择具有att属性的E元素
+E[att="val"] 选择具有att属性、且属性值等于val的E元素
+E[att^="val"] 匹配具有att属性、且属性值以val开头的E元素
+E[att$="val"] 匹配具有att属性、且属性值以val结尾的E元素
+E[att*="val"] 匹配具有att属性、且属性值中含有val的E元素
+
+例如
+<style>
+    /* 将button标签中的 具有属性名 disabled 的选择出来 */
+    button[disabled] {
+        color: blue;
+    }
+    button[disabled="disabled"] {
+    color: pink;
+}
+</style>
+<button>按钮</button>
+<button disabled="disabled">按钮</button>
+
+-----------------------
+2.结构伪类选择器
+
+E:first-child 匹配父元素中的第一个子元素E
+E:last-child 匹配父元素中的最后一个子元素E
+E:nth-child(n) 匹配父元素中的第n个子元素E
+E:first-of-type 指定类型E的第一个
+E:last-of-type 指定类型E的最后一个
+E:nth-of-type(n) 指定类型E的第n个
+
+<style>
+    /* 将第一个元素选择出来 */
+    标签名:first-child { 
+        属性:属性值;
+    }
+</style>
+
+例如
+<style>
+    /* 将 ul 中的第一个li选择出来 */
+    ul li:first-child {
+        color: pink;
+    }
+    ul li:last-child {
+        font-size: 20px;
+    }
+    /* 将 ul 中的第2个li选择出来 */
+    ul li:nth-child(2) {
+        background-color: green;
+    }
+</style>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+</ul>
+
+
+-----------------------
+nth-child(n)
+    n可以是数组、关键字和公式
+    n如果是数字，就是选择第几个
+    常见的关键词有 even偶数 odd奇数
+    常见的公式如下(如果n是公式，则从0开始计算)
+    但是第0个元素或者超出了元素的个数会被忽略
+
+常见的公式:n是从0开始的
+    2n:偶数
+    2n+1:奇数
+    5n:5 10 15...
+    n+5:从第五个开始(包含第五个)到最后
+    -n+5:前5个(包含第五个)
+
+<style>
+    /* 将 ul 中的 偶数编号的元素选择出来 */
+    ul li:nth-child(even) {
+        background-color: red;
+    }
+    ul li:nth-child(-n+5) {
+        background-color: green;
+    }
+    /* 父标签 后边加空格 然后 nth-child 不区分子标签类型，直接按顺序选择子元素 */
+    ul :nth-child(2) {
+            background-color: pink;
+    }
+</style>
+
+:nth-child(n) 选择父元素里边的第n个孩子，是不管里面的孩子是否是同一种类型
+<style>
+    /* 选择的元素既是span 又是div下的第一个元素，所以并不会选择出元素来 */
+    div span:nth-child(1) {
+        background-color:pink;
+    }
+    /* 选择的元素既是span 又是div下的第二个元素，所以可以选择出元素来 */
+    div span:nth-child(2) {
+        background-color:pink;
+    }
+</style>
+<div>
+    <p>ppp</p>
+    <span>ssss</span>
+    <span>ssss</span>
+    <span>ssss</span>
+</div>
+
+-----------------------
+E:first-of-type 指定类型E的第一个
+E:last-of-type 指定类型E的最后一个
+E:nth-of-type(n) 指定类型E的第n个
+<style>
+    /* 直接按元素的类型来选择第一个元素 */
+    div span:first-of-type {
+        background-color: pink;
+    }
+    /* 可以把div下的所有span标签中的第一个元素选择出来 */
+    div span:nth-of-type(1) {
+        background-color: pink;
+    }
+</style>
+
+---------------------------------------------
+3.伪元素选择器
+::before 在元素内部的前面插入内容
+::after 在元素内部的后面插入内容
+
+注意:
+    before和after必须有 content属性
+    before在内容的前面，after在内容的后面
+    before和after创建一个元素，但是属于行内元素
+    因为在dom里面看不见刚才创建的元素，所以我们称为伪元素
+    伪元素和标签选择器一样，权重为1
+
+例子
+
+<style>
+    div {
+        width: 100px;
+        height: 100px;
+        border: black 1px solid;
+    }
+    div::before {
+        background-color: pink;
+        content: "前面";
+    }
+    div::after {
+        background-color: green;
+        content: "后面";
+    }
+</style>
+
+<div>内容</div>
 
 -----------------------
 
@@ -30,8 +285,21 @@ h5新增语义化标签
 
 ---------------------------------------------
 
+
 ---------------------------------------------
 
+
+-----------------------
+
+-----------------------
+
+-----------------------
+
+
+---------------------------------------------
+
+
+---------------------------------------------
 
 
 -----------------------
