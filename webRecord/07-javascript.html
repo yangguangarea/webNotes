@@ -264,13 +264,6 @@ typeof 检测数据类型
     console.log( false || 'a' && "c" != "d");//true
 </script>
 
-
-
-
----------------------------------------------
-
----------------------------------------------
-
 ---------------------------------------------
 数组
 
@@ -325,10 +318,152 @@ typeof 检测数据类型
 作用域
 
 <script>
-    
+    //js的作用于(es6)之前：全局作用域 局部作用域 
+    //全局作用域:整个script标签 或者是一个单独的js文件
+    var num = 10;
+    //局部作用域(函数作用域) 在函数内部就是局部作用域
+    function fun() {
+        var num1 = 5;
+    }
 </script>
 
+<script>
+    //变量的作用域： 根据作用域的不同我们变量分为全局变量和局部变量
+    //1.全局变量: 在全局作用域下的变量
+    //如果在函数内部 没有声明直接赋值的变量也叫全局变量
+    var aaa = 5;//aaa就是一个全局变量
+
+    //2.局部变量: 在局部作用域下的变量就是局部变量
+    function name(params) {
+        var bbb = 5;//bbb是一个局部变量
+        ccc = 4;//ccc是一个全局变量
+    }
+
+    //3.从执行效率来看全局变量和局部变量
+    //(1) 全局变量只有浏览器关闭的时候才销毁，比较占用内存
+    //(2) 局部变量 当程序执行完毕就销毁了
+
+    //块级作用域
+    //js 没有块级作用域 在es6之后新增加了块级作用域
+    if(true) {
+        var ddd = 5;
+    }
+    console.log(ddd);//输出5
+    
+    //作用域链:内部函数访问外部函数的变量，采用链式查找变量
+    var num = 10;
+    function fun1() {
+        var num = 20;
+        function fun2() {
+            console.log(num);//输出20
+        }
+    }
+
+</script>
+
+---------------------------------------------
+预解析
+
+javascript解析器在运行javascript代码的时候分为两步:预解析和代码执行
+(1).预解析: js引擎会把js里面所有的var还有function提升到当前作用域的最前面
+(2).代码执行: 按照代码书写的顺序从上往下执行
+
+预解析分为 变量预解析（变量提升）和函数预解析（函数提升）
+(1)变量预解析:把所有的变量声明提升到当前的作用域最前面,不提升赋值操作
+(2)函数预解析:把所有的函数声明提升到当前作用域的最前面,不调用函数
+
+<script>
+    //报错 num1 is not defined
+    console.log(num1)
+
+    //输出undefined，也就是说num2变量声明了未定义
+    console.log(num2);//undefined
+    var num2 = 10;
+
+    //正常执行
+    fun1();
+    function fun2() {
+        console.log('fun1');
+    }
+
+    //报错，没有fun2
+    fun2();
+    var fun2 = function() {
+        console.log('fun2');
+    }
+
+</script>
+
+<script>
+    var num = 10;
+    function fun() {
+        console.log(num);//输出undefined
+        var num = 20;
+    }
+    fun();
+
+    //上边代码预解析之后相当于
+    var num;
+    function fun() {
+        var num;
+        console.log(num);//根据就近原则，num是函数内部的num
+        num = 20;
+    }
+    num = 10;
+    fun();
+</script>
+
+<script>
+    f1();
+    console.log(c);
+    console.log(b);
+    console.log(a);
+    function f1() {
+        var a = b = c = 9;
+        //这句等价于 var a = 9; b = 9; c = 9;
+        //所以b, c是全局变量
+        console.log(a);
+        console.log(b);
+        console.log(c);
+    }
+    //最终输出 9 9 9 9 9 报错a is not defined
+
+    //上边代码预解析之后相当于
+    function f1() {
+        var a;
+        a = b = c = 9;
+        console.log(a);
+        console.log(b);
+        console.log(c);
+    }
+    f1();
+    console.log(c);
+    console.log(b);
+    console.log(a);
+</script>
+
+---------------------------------------------
+对象
+在JavaScript中, 对象是一组无序的相关属性和方法的集合
+所有的事物都是对象，例如字符串、数值、数组、函数等
+
 -----------------------
+创建对象的三种方式
+1.利用字面量创建对象
+<script>
+    var obj = {};
+</script>
+
+2.利用 new Object 创建对象
+<script>
+    var obj = new Object();
+</script>
+
+3.利用构造函数创建对象
+<script>
+    var obj = 
+</script>
+
 
 -----------------------
 
