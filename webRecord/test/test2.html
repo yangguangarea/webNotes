@@ -107,9 +107,115 @@
             background-color: green;
             content: "后面";
         }
+        .weilei:hover {
+            transform: translate(50%, 50%);
+        }
     </style>
     
     <div class="weilei">内容</div>
+
+
+    <style>
+        .parent {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: relative;;
+        }
+        .child {
+            width: 30px;
+            height: 30px;
+            background-color: green;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+        }
+    </style>
+    
+    <div class="parent">
+        <div class="child">内容</div>
+    </div>
+
+    <style>
+        .triangle {
+            width: 200px;
+            height: 50px;
+            border: 1px solid black;
+            position: relative;
+        }
+        .triangle::after {
+            content: "";
+            position: absolute;
+            border-right: 1px solid gray;
+            border-bottom: 1px solid gray;
+            top: 5px;
+            right: 5px;
+            display: block;
+            transform: rotate(45deg);
+            width: 10px;
+            height: 10px;
+            transition: all 0.5s;
+            transform-origin: 75% 75%;
+        }
+        .triangle:hover::after {
+            transform: rotate(225deg);
+        }
+    </style>
+    <div class="triangle"></div>
+
+    <style>
+        .origin {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            transition: all 1s;
+            /* transform-origin: 0 bottom; */
+        }
+        .origin:hover {
+            transform: rotate(7200deg);
+        }
+    </style>
+    <div class="origin"></div>
+    
+
+
+    <style>
+        .aniblock {
+            width: 500px;
+            height: 200px;
+            background-color: aqua;
+            margin: 100px auto;
+            /* animation: moveani 4s; */
+            position: absolute;
+        }
+        @keyframes moveani {
+            0% {
+                left: 0;
+                top: 0;
+            }
+            25% {
+                top:0;
+                right: 0;
+            }
+            50% {
+                right: 0;
+                bottom: 0;
+            }
+            75% {
+                bottom:0;
+                left: 0;
+            }
+            100% {
+                left: 0;
+                top: 0; 
+            }
+        }
+    </style>
+    <div class="aniblock"></div>
+
+    <br>
+    <br>
 
 </body>
 </html>
