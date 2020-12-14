@@ -216,8 +216,7 @@
 
 
     <style>
-        .touship,
-        .toushi {
+        .touship {
             width: 100px;
             height: 100px;
             background-color: green;
@@ -234,6 +233,37 @@
     <div class="touship">
         <div class="toushi"></div>
     </div>
+
+    <style>
+        .tablebox {
+            width: 100px;
+            height: 100px;
+            margin: 100px auto;
+            background-color: pink;
+        }
+        .turntable {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: green;
+            text-align: center;
+            line-height: 100px;
+            /* transition: linear 4s; */
+            animation: rotate 1s infinite linear;
+            
+        }
+        @keyframes rotate {
+            0% {
+            }
+            100% {
+                transform: rotateZ(360deg);
+            }
+        }
+    </style>
+    <div class="tablebox">
+        <div class="turntable">转盘</div>
+    </div>
+    
 
     <br>
     <br>
