@@ -265,6 +265,81 @@
     </div>
     
 
+    <style>
+        .transstylebox {
+            width: 200px;
+            height: 200px;
+            margin: 100px auto;
+            position: relative;
+            perspective: 500px;
+            transform-style:preserve-3d;
+        }
+        .transstylebox .box1 {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            transform: rotateY(-90deg);
+            background-color: pink;
+            transform-style:preserve-3d;
+        }
+        .transstylebox .box1 .box2 {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            transform: rotateX(45deg);
+            /* background-color: pink; */
+            /* transform-style:preserve-3d; */
+            /* transform: rotateX(90deg); */
+            background-color: yellow;
+        }
+    </style>
+    <div class="transstylebox">
+        <div class="box1">
+            <div class="box2"></div>
+        </div>
+    </div>
+
+<!-- 
+    <style>
+        .navpar {
+            width: 200px;
+            height: 100px;
+            background-color: yellow;
+            transform-style:preserve-3d;
+            perspective: 500px;
+        }
+        .nav1, .nav2 {
+            width: 200px;
+            height: 100px;
+            font-size: 20px;
+            line-height: 100px;
+            text-align: center;
+            
+        }
+        .nav1 {
+            background-color: pink;
+            transform: translateZ(50px);
+            transform: rotateX(90deg);
+            
+        }
+        .nav2 {
+            transform: translateZ(50px);
+            background-color:hotpink;
+        }
+
+    </style>
+    <div class="navpar">
+        <div class="nav1"></div>
+        <div class="nav2"></div>
+    </div> -->
+
+    <dl>
+        <dt>项1</dt>
+        <dd>内容1</dd>
+        <dd>内容2</dd>
+        <dt>项2</dt>
+        <dd>内容1</dd>
+    </dl>
     <br>
     <br>
 
