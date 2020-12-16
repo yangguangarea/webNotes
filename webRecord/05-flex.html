@@ -278,18 +278,30 @@ align-items 设置侧轴上的子元素排列方式(单行)
         align-items: flex-end;
         /* 挤在一起居中(垂直居中) */
         align-items: center;
-        /* 拉伸 */
+        /* 拉伸 会拉到父盒子那么长 但是子盒子不要给高度，给高度不会拉伸*/
         align-items: stretch;
     }
 </style>
 
-
-
-
-
-
 -----------------------
-
+align-content 设置侧轴上的子元素的排列方式(多行)
+设置子项在侧轴上的排列方式 并且只能用于子项出现 换行 的情况(多行),在单行下是没有效果的
+<style>
+    div {
+        /* 默认值 在侧轴的头部开始排列 */
+        align-content: flex-start;
+        /* 在侧轴的尾部开始排列 */
+        align-content: flex-end;
+        /* 在侧轴中间显示 */
+        align-content: center;
+        /* 子项在侧轴平分剩余空间 */
+        align-content: space-around;
+        /* 子项在侧轴线分布在两头 再平分剩余空间 */
+        align-content: space-between;
+        /* 设置子项元素高度平分父元素高度 */
+        align-content: stretch;
+    }
+</style>
 
 ---------------------------------------------
 
