@@ -85,7 +85,7 @@ CSS初始化 normalize.css
 
 -----------------------
 CSS3盒子模型 box-sizing
-传统模式宽度计算: 盒子宽度 = CSS中设置的with + border + padding
+传统模式宽度计算: 盒子宽度 = CSS中设置的 with + border + padding
 CSS3盒子模型: 盒子的宽度 = CSS中设置的宽度width 里边包含了 border 和 padding
 也就是说CSS3中的盒子模型，padding和border不会撑大盒子
 <style>
@@ -183,6 +183,7 @@ flex布局原理
 以下6个属性是对父元素设置的
 <style>
     div {
+        display: flex;/* 给父级添加flex属性*/
         flex-direction: 设置主轴的方向;
         justify-content: 设置主轴上的子元素排列方式;
         flex-wrap: 设置子元素是否换行;
@@ -302,15 +303,184 @@ align-content 设置侧轴上的子元素的排列方式(多行)
         align-content: stretch;
     }
 </style>
+-----------------------
+align-content 和 align-items 区别
+align-items 适用于单行情况下，只有上对齐、下对齐、居中和拉伸
+align-content 适用于换行(多行)的情况下(单行情况下无效)
+总结就是单行找align-items 多行找align-content
+
+-----------------------
+flex-flow
+flex-flow属性是flex-direction 和 flex-wrap属性的复合属性
+<style>
+    div {
+        flex-flow: column wrap;
+        flex-flow: row nowrap;
+    }
+</style>
+
+-----------------------
+flex布局子项常见属性
+    flex子项占的份数
+    align-self控制子项自己在侧轴的排列方式
+    order属性定义子项的排列顺序(前后顺序)
+
+-----------------------
+flex属性
+flex属性定义子项目分配剩余空间，用flex来表示占多少份数
+flex可以写分数，也可以写百分比
+<style>
+    .item {
+        flex: number; /*默认是0 */
+    }
+</style>
+
+例子
+<style>
+    section {
+        width: 80%;
+        height: 200px;
+        display: flex;
+        /* flex-flow: row nowrap; */
+        background-color: pink;
+        align-items: center;
+    }
+
+    div[class^="flex"] {
+        width: 100px;
+        height: 100px;
+        background-color: gray;
+    }
+    div[class="flex2"] {
+        background-color: hotpink;
+        flex: 1;
+    }
+</style>
+
+<section>
+    <div class="flex1">1</div>
+    <div class="flex2">2</div>
+    <div class="flex3">3</div>
+</section>
+
+-----------------------
+align-self 控制子项自己在侧轴上的排列方式
+align-self 属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性
+默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch
+
+例子
+<style>
+    .self {
+        width: 500px;
+        height: 200px;
+        display: flex;
+        background-color: pink;
+        margin-top: 100px;
+    }
+
+    div[class^="selfxx"] {
+        width: 100px;
+        height: 50px;
+        background-color: hotpink;
+    }
+
+    div[class="selfxx2"] {
+        align-self:flex-end
+    }
+</style>
+<div class="self">
+    <div class="selfxx1">1</div>
+    <div class="selfxx2">2</div>
+    <div class="selfxx3">3</div>
+</div>
+
+-----------------------
+order 属性定义项目的排列顺序
+数值越小，排列越靠前，默认为0
+<style>
+    div {
+        order: -1;
+    }
+</style>
 
 ---------------------------------------------
+rem单位
+rem(root em)是一个相对单位，类似于em, em是父元素字体大小
+不同的是rem的基准相对于html元素的字体大小
+比如，根元素(html)设置font-size=12px; 非根元素设置width:2rem;则换成px表示就是24px
 
+<style>
+    html {
+        font-size: 10px;
+    }
+    div {
+        width: 10rem;
+        height: 10rem;
+        background-color: pink;
+    }
+</style>
+<div>内容</div>
+
+---------------------------------------------
+什么是媒体查询
+媒体查询(Media Query)是CSS3新语法
+使用@media查询，可以针对不同的媒体类型定义不同的样式
+@media 可以针对不同的屏幕尺寸设置不同的样式
+当你重置浏览器大小的过程中，页面也会根据浏览器的宽度和高度重新渲染页面
+目前针对很多苹果手机、Android手机，平板等设备都用得到多媒体查询
 
 -----------------------
+语法规范
+<style>
+    /* @media mediatype and|not|only (media feature) {
+        CSS-Code;
+    } */
+</style>
+用@media开头 注意@符号
+mediatype媒体类型
+关键字 and not only
+media feature 媒体特性 必须有小括号包含
 
 -----------------------
+1.mediatype查询类型
+将不同的终端设备划分成不同的类型，称为媒体类型
+all: 用于所有设备
+print: 用于打印机和打印预览
+screen: 用于电脑屏幕，平板电脑，只能手机等
 
 -----------------------
+2.关键字
+关键字将媒体类型或多个媒体特性连接到一起作为媒体查询的条件
+and: 可以将多个媒体特性连接到一起，相当于"且"的意思
+not: 排除某个媒体类型，相当于"非"的意思，可以省略
+only: 指定某个特定的媒体类型，可以省略
+
+-----------------------
+3.媒体特性
+每种媒体类型都具体各自不同的特性，根据不同媒体类型的媒体特性设置不同的展示风格
+注意他们要加小括号包含
+width: 定义输出设备中页面可见区域的宽度
+min-width: 定义输出设备中页面最小可见区域的宽度
+max-width: 定义输出设备中页面最大可见区域的宽度
+
+例如
+<style>
+    /* 这句话的意思就是: 在我们屏幕上 并且 最大的宽度是800px 设置我们想要的样式 */
+    /* 如果在屏幕上 并且 宽度小于等于800px 就把背景颜色设置为粉色 */
+    @media screen and (max-width: 800px) and (min-width: 300px) {
+        body {
+            background-color: pink;
+        }
+    }
+</style>
+
+-----------------------
+媒体查询+rem实现元素动态大小变化
+rem单位是跟着html来走的，有了rem页面元素可以设置不同大小尺寸
+媒体查询可以根据不同设备宽度来修改样式
+媒体查询+rem 就可以实现不同设备宽度，实现页面元素大小的动态变化
+
+
 ---------------------------------------------
 
 

@@ -1,7 +1,26 @@
 
 
 ---------------------------------------------
+背景线性渐变
+必须要添加浏览器的自有前缀
+起始方向可以是: 方位名词 或者 度数，省略的话默认是top
+<style>
+    div {
+        /* background: linear-gradient(起始方向, 颜色1, 颜色2, ...); */
+        background: -webkit-linear-gradient(left, red, blue);
+        background: -webkit-linear-gradient(left top, red, blue);
+    }
+</style>
 
+例子
+<style>
+    .jianbian {
+        width: 100px;
+        height: 200px;
+        background: -webkit-linear-gradient(left, red, blue);
+    }
+</style>
+<div class="jianbian">1</div>
 
 -----------------------
 
