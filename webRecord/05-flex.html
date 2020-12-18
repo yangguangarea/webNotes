@@ -480,6 +480,183 @@ rem单位是跟着html来走的，有了rem页面元素可以设置不同大小�
 媒体查询可以根据不同设备宽度来修改样式
 媒体查询+rem 就可以实现不同设备宽度，实现页面元素大小的动态变化
 
+<style>
+    @media screen and (min-width:0px){
+        html {
+            font-size: 12px;
+        }
+    }
+    @media screen and (min-width:400px){
+        html {
+            font-size: 15px;
+        }
+    }
+    @media screen and (min-width:600px){
+        html {
+            font-size: 18px;
+        }
+    }
+    div {
+        width: 10rem;
+        height: 10rem;
+        line-height: 10rem;
+        font-size: 2rem;
+        background-color: pink;
+        text-align: center;
+    }
+</style>
+
+-----------------------
+引入资源
+当样式比较繁多的时候，我们可以针对不同的媒体使用不同stylesheets(样式表)
+原理，就是直接在link中判断设备的尺寸，然后引用不同的css文件
+
+语法规范
+<link rel="stylesheet" media="mediatype and|not|only (media feature)" href="mystylesheets.css">
+
+例如
+<head>
+    <link rel="stylesheet" media="screen and (min-width: 400px)" href="400.css">
+    <link rel="stylesheet" media="screen and (min-width: 600px)" href="600.css">
+</head>
+
+---------------------------------------------
+维护CSS的弊端
+CSS是一门非程序式语言，没有变量、函数、SCOPE(作用域)等概念
+    CSS需要书写大量看似没有逻辑的代码，CSS冗余度是比较高的
+    不方便维护及扩展，不利于复用
+    CSS没有很好的计算能力
+
+-----------------------
+Less介绍
+Less(Leaner Style Sheets) 是一门CSS扩展语言，也成为CSS预处理器
+作为CSS的一种形式的扩展，它并没有减少CSS的功能，而是在现有的CSS语法上，为CSS加入程序式语言的特性。
+它在CSS语法基础上，引入了变量，Mixin(混入), 运算以及函数等功能，大大简化了CSS的编写
+并且降低了CSS的维护成本
+
+Less中文网址: http://lesscss.cm/
+常见的CSS预处理器：Sass、Less、Stylus
+
+-----------------------
+Less安装
+1.安装nodejs
+2.检查是否安装成功，输入node -v
+3.基于nodejs在线安装Less，使用 npm install -g less
+4.检查是否安装成功，输入 lessc -v
+
+-----------------------
+Less使用
+首先新建一个后缀名为less的文件
+
+-----------------------
+Less变量
+变量是指没有固定的值，可以改变的，因为我们CSS中一些颜色和数值等经常使用
+
+@变量名:值;
+1.变量命名规范
+必须有@为前缀
+不能包含特殊字符
+不能以数字开头
+大小写敏感
+
+例子
+<style>
+    /* @color: pink;
+    @font14: 14px;
+    div {
+        background-color: @color;
+        font-size: @font14;
+    } */
+</style>
+
+-----------------------
+Less编译
+本质上，Less包含一套自定义的语法及一个解析器，用户根据这些语法定义自己的样式规则，这些
+规则最终会通过解析器，编译生成对应的CSS文件
+
+vscode 安装 Easy LESS 插件
+安装完后，保存一下，就会自动生成同名的css文件
+
+-----------------------
+Less嵌套
+如果遇见(交集|伪类|伪元素选择器)
+    内层选择器的前面没有&符号，则它被解析为父选择器的后代
+    如果有&符号，它就被解析为父元素自身或父元素的伪类
+
+<style>
+    子元素的样式直接写到父元素里面
+    /* .cla1 {
+        background-color: pink;
+        .cla2 {
+            background-color: green;
+            &:hover {
+                background-color: hotpink;
+            }
+        }
+    } */
+</style>
+
+<div class="cla1">
+    <div class="cla2"></div>
+</div>
+
+-----------------------
+Less运算
+任何数字、颜色或者变量都可以参与预算。就是Less提供了 + - * / 算数运算
+<style>
+    /* @width: 100rem; */
+    /* div { */
+        /* width: 100px - 20; 结果就是80px */
+        /* height: 200px * 2; 400px */
+    /* } */
+    /* img { */
+        /* width: (82 / @width) + 2; */
+    /* } */
+</style>
+
+注意:
+    运算符中间左右必须要有空格隔开
+    对于两个不同的单位的值之间的运算，运算结果的值取第一个值的单位
+    如果两个值之间只有一个值有单位，则运算结果就取该单位
+
+-----------------------
+一个less文件中导入另一个less文件
+在 a.less中导入 b.less
+a.less中写 @import "b.less" 也可以不加后缀名
+
+---------------------------------------------
+rem实际开发适配方案
+按照设计稿与设备宽度的比例，动态计算并设置html根标签的font-size大小
+CSS中，设计稿元素的宽、高、相对位置等取值，按照同等比例换算为rem为单位的值
+
+元素大小取值方法
+    页面元素的rem值 = 页面元素值(px) / (屏幕宽度 / 划分的分数)
+    屏幕宽度 / 划分的分数就是 html font-size 的大小
+    页面元素的rem值 = 页面元素值(px) / html font-size
+
+---------------------------------------------
+rem适配方案 flexible.js
+手机淘宝团队出的移动端适配库
+flexible把屏幕分为了10份，所以只需要设置html的字体大小
+比如设计宽度是750px，html的字体大小就是75px
+
+在模板中需要引入filexible.js文件
+<script src="路径/flexible.js"></script>
+
+---------------------------------------------
+vscode px转换rem插件 cssrem
+安装完后设置html的基准值
+在设置中搜索cssrem, 把rootFontSize改成目标大小
+
+---------------------------------------------
+响应式开发
+-----------------------
+
+-----------------------
+
+-----------------------
+
+
 
 ---------------------------------------------
 
@@ -488,16 +665,5 @@ rem单位是跟着html来走的，有了rem页面元素可以设置不同大小�
 
 -----------------------
 
------------------------
-
----------------------------------------------
-
-
----------------------------------------------
-
-
------------------------
-
------------------------
 
 -----------------------
