@@ -252,6 +252,53 @@ public:
     }
 
     //----------------------
+    //main.cpp
+    #include<iostream>
+    using namespace std;
+    void MaxSort(int a[], int i, int n)
+    {
+        int j = 2*i+1;//找到当前结点的左孩子
+        int temp = a[i];//把当前结点的数赋给temp变量，后面会发现这个变量很有用
+        while(j < n)//判断必须条件，大于或等于该结点都属于数组越界
+        {
+            if(j+1 <n && a[j] < a[j+1])//判断条件，第一个条件是判断是不是最后一个结点。
+                                    //第二个判断条件是找出孩子结点最大的数方便与结点交换。
+                ++j;//如果后面的大，那么交换的变成后面的孩子。
+            if(temp > a[j])//因为我们是MaxSort所以如果父结点本身就大不用判断直接跳出循环。
+                break;
+            else
+            {
+                a[i] = a[j];//判断过程，把最大的孩子结点的数赋给父结点。并利用递归思想找出子节点的子节点。
+                i = j;
+                j = 2*i+1;
+            }
+        }
+        a[i] = temp;//i已经成为了孩子结点的下标，赋值temp，也就是原本父结点的值，达成交换。
+    }
+    
+    //堆排序
+    void HeapSort(int a[], int n)
+    {
+        for(int i= n/2-1;i>=0;i--)//从最后一个结点的父结点开始“向前遍历”。
+            MaxSort(a,i,n);
+        for(int i=n-1;i>=1;i--)
+        {
+            //swap(a[i],a[0]);
+            MaxSort(a,0,i);
+        }//逆序
+    }
+    int main()
+    {
+        int a[10] = {5,10,7,34,23,58,2,55,35,45};
+        HeapSort(a,10);
+        for (int i=0;i<10;i++)
+            cout << a[i] << " ";
+        return 0;
+    }
+
+
+
+    //----------------------
     //计数排序 适合数值有限范围，有大量的数
     void countingSort(vector<int>& array){
         if(!array.size()) return;
