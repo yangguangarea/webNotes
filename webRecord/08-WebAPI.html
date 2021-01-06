@@ -31,7 +31,7 @@ DOM树
 
 -----------------------
 根据id获取
-使用getElementById()方法可以获取带有ID的元素对象
+使用getElementById(id)方法可以获取带有ID的元素对象
 找不到返回null
 
 <div id="example">内容</div>
@@ -42,16 +42,22 @@ DOM树
 
 -----------------------
 根据标签名获取
-使用getElementsByTagName() 方法可以返回带有指定标签名的对象的集合
+使用element.getElementsByTagName('标签名') 方法可以返回带有指定标签名的对象的集合
 会返回一个伪数组
 得到的元素是动态的
 <script>
     //获取整个document里面所有的div集合
     var elements = document.getElementsByTagName('div');
+    // var elements = element.getElementsByTagName('li');
+    //可以通过遍历访问伪数组中的元素
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+    }
 
     //获取id是example里边的所有的div标签集合
     var element = document.getElementById("example");
     element.getElementsByTagName('div');
+
 </script>
 
 -----------------------
@@ -59,14 +65,43 @@ DOM树
 
 <script>
     //根据类名获取元素对象集合
-    document.getElementsByClassName('类名');
+    var elements = document.getElementsByClassName('类名');
+
+    //根据指定选择器返回第一个元素对象
+    var element = document.querySelector('选择器');
+
+    //比如选择第一个类名是 box 的元素
+    var firstBox = document.querySelector('.box');
+    //比如选择第一个id是 box 的元素
+    var firstBox = document.querySelector('#box');
+
+    //根据指定选择器返回所有符合条件的元素对象
+    var elements = document.querySelectorAll('选择器');
 </script>
 
-
+-----------------------
+获取特殊元素(body, html)
+<script>
+    //获取body元素
+    var body = document.body;
+    //获取html元素
+    var html = document.documentElement;
+</script>
 
 -----------------------
+事件概述
 
------------------------
+<script>
+    // 事件是有三部分组成
+    // 1.事件源:事件被触发的对象
+    var btn = document.getElementById('btn');
+    // 2.事件类型:如何触发 什么事件
+    // 3.事件处理程序:通过一个函数复制的方式
+    btn.onclick = function() {
+        console.log("按钮被点击了");
+    }
+</script>
+
 
 -----------------------
 
