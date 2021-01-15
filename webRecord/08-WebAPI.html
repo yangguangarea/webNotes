@@ -102,13 +102,85 @@ DOM树
     }
 </script>
 
-
------------------------
-
------------------------
-
 ---------------------------------------------
+操作元素
+javascript的DOM操作可以改变网页内容、结构和样式，我们可以利用DOM操作元素来
+改变元素里面的内容、属性等
+-----------------------
+改变元素内容
 
+<script>
+    //element.innerText
+    //从起始位置到终止位置的内容，但它去除html标签，同时空格和换行也会去掉
+
+    //element.innerHTML
+    //起始位置到终止位置的全部内容，包括html标签，同时保留空格和换行
+
+    //innerText 和 innerHTML 的区别
+    // 1.innerText 不识别html标签 打印出之后去除空格和换行
+    // 2.innerHTML 是被html标签 w3c标准 打印出之后保留空格和换行
+    // 这两个属性是可读写的 可以获取元素里面的内容
+</script>
+
+例子:
+<div id="biaoqian">当前内容</div>
+<script>
+    let d = document.getElementById('biaoqian');
+    d.innerText = '<strong>内容</strong>内容';//显示内容为 <strong>内容</strong>内容
+    d.innerHTML = '<strong>内容</strong>内容';//显示内容为 加粗后的字体
+</script>
+
+-----------------------
+常用元素的属性操作
+
+1. innerText、innerHTML 改变元素内容
+2. src、href
+3. id、alt、title
+
+元素对象.属性名称
+
+例子:
+<button id='btn1'>图片1</button>
+<button id='btn2'>图片2</button>
+<img id='pic' src="http://www.baidu.com/img/flexible/logo/pc/result.png" alt="到百度首页" title="到百度首页">
+<script>
+    let btn1 = document.getElementById('btn1');
+    let btn2 = document.getElementById('btn2');
+    // let img = document.getElementById('pic');
+    let img = document.querySelector('img');
+    btn1.onclick = () => {
+        console.log("----ffff", img);
+        img.src = `http://www.baidu.com/img/flexible/logo/pc/result.png`;
+        img.title = `旧百度图片`;
+    }
+    btn2.onclick = () => {
+        img.src = `http://www.baidu.com/img/flexible/logo/pc/peak-result.png`
+        img.title = `新百度图片`;
+    }
+</script>
+
+-----------------------
+表单元素的属性操作
+利用DOM可以操作如下表单元素的属性:
+type、value、checked、selected、disabled
+
+<input type="text" name="" id="inp">
+<button id='btn1'>按钮</button>
+<script>
+    //表单里面的值 文字内容是通过value来修改的
+    let inp = document.getElementById('inp');
+    inp.value = '内容';
+
+    //禁用按钮
+    let btn1 = document.getElementById('btn1');
+    btn1.onclick = () => {
+        btn1.disabled = true;
+    }
+    btn1.onclick = function() {
+        //这里的this指的是事件函数的调用者
+        this.disabled = true;
+    }
+</script>
 
 -----------------------
 
