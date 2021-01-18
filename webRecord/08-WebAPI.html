@@ -183,6 +183,28 @@ type、value、checked、selected、disabled
 </script>
 
 -----------------------
+样式属性操作
+可以通过js修改元素的大小、颜色、位置等样式
+1.element.style 行内样式操作
+2.element.className 类名样式操作
+
+注意:
+1.js里面的样式采取驼峰命名法 比如 fontSize、backgroundColor
+2.js修改style样式操作，产生的是行内样式，css权重比较高
+
+<div class="block" style="width:100px; height:100px; background-color:pink;"></div>
+<script>
+    var block = document.querySelector('.block');
+    block.onclick = () => {
+        block.style.backgroundColor = "blue";//这样改完生效的是行内样式
+        // block.style.cssText += "background-color:blue;";
+    }
+</script>
+
+
+
+利用样式的显示和隐藏完成，display:none display:block
+
 
 -----------------------
 

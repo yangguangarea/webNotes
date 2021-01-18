@@ -4,42 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
 </head>
 <body>
+    <style>
+        .block {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+    </style>
+    <div class="block" ></div>
 
-    <!-- <button>点击按钮</button>
-    <div id="biaoqian">当前内容</div>
     <script>
-        // let btn = document.getElementsByTagName('button')[0];
-
-
-        // btn.onclick = () => {
-        //     let d = document.getElementById('biaoqian');
-        //     // d.innerText = '改变内容';
-        //     d.innerHTML = '你是谁'
-        // }
-        let d = document.getElementById('biaoqian');
-        
-        setInterval(() => {
-            let time = new Date();
-            let showstr = `<strong>${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}</strong>`;
-            // d.innerText = showstr;
-            d.innerHTML = showstr;
-        }, 1000);
-
-    </script> -->
-
-    <input type="text" name="" id="inp">
-    <button id='btn1'>按钮</button>
-    <script>
-        //表单里面的值 文字内容是通过value来修改的
-        let inp = document.getElementById('inp');
-        inp.value = '内容';
-    
-        let btn1 = document.getElementById('btn1');
-        btn1.onclick = () => {
-            // btn1.disabled = true;
-            this.disabled = true;
+        // let block = document.getElementsByClassName("block")[0];
+        var block = document.querySelector('.block');
+        block.onclick = () => {
+            block.style.backgroundColor = "blue";
+            // block.style.cssText += "background-color:blue;";
         }
     </script>
 </body>
