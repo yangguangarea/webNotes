@@ -201,9 +201,30 @@ type、value、checked、selected、disabled
     }
 </script>
 
-
-
+-----------------------
 利用样式的显示和隐藏完成，display:none display:block
+<div class="block" style="width: 100px; height: 100px; background-color: pink;"></div>
+<script>
+    var block = document.querySelector('.block');
+    block.onclick = () => {
+        block.style.display = "none";
+    }
+</script>
+
+-----------------------
+获得焦点onfocus 失去焦点onblur
+<input type="text" name="" id="text" value="推荐内容">
+<script>
+    let text = document.querySelector("#text");
+    text.onfocus = () => {
+        text.value = "";
+    }
+    text.onblur = () => {
+        if(text.value === "") {
+            text.value = "推荐内容"
+        }
+    }
+</script>
 
 
 -----------------------
