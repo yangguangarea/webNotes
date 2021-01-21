@@ -226,29 +226,179 @@ type、value、checked、selected、disabled
     }
 </script>
 
-
 -----------------------
+通过修改类名来改变样式
+1.如果样式修改较多，可以采取操作类名方式更改元素样式
+2.class因为是个保留字，因此使用className来操作元素类名属性
+3.className 会直接更改元素的类名，会覆盖原先的类名
+4.如果想要保留原先的类名 将原先的类名和新的类名拼接起来
+<style>
+    .st1 {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+    }
+    .st2 {
+        width: 200px;
+        height: 200px;
+        background-color: #ccc;
+    }
+</style>
 
-
------------------------
-
------------------------
-
------------------------
-
------------------------
-
-
+<div class="st1"></div>
+<script>
+    let box = document.querySelector(".st1");
+    box.onclick = () => {
+        // box.className = "st2";
+        box.className += " st2";
+    }
+</script>
 
 ---------------------------------------------
-
-
------------------------
-
------------------------
-
+鼠标经过事件 onmouseover
+鼠标离开事件 onmouseout
+复选框是否选中状态 checked
+<input type="checkbox" name="" id="" checked>
 
 -----------------------
+获取元素属性值
+1.element.属性 获取属性值
+2.element.getAttribute("属性");
+
+<div class="exa" selfAttr="fuck" id="exaid"></div>
+<script>
+    let d = document.querySelector('.exa');
+    console.log(d.selfAttr);//输出undefined
+    console.log(d.id);//输出exaid
+    console.log(d.getAttribute('selfAttr'));//输出fuck
+    console.log(d.getAttribute('id'));//输出exaid
+</script>
+
+区别:
+element.属性 获取内置属性值(元素本身自带的属性)
+element.getAttribute('属性'); 主要获得自定义的属性(标准)
+
+-----------------------
+设置元素属性值
+1.element.属性 = '值'
+2.element.setAttribute('属性', '值')
+3.element.removeAttribute('属性') 移除指定的属性
+区别:
+element.属性 改变元素本身属性
+element.setAttribute 改变自定义的属性，也能修改预设的属性
+
+class比较特殊，使用setAttribute的时候 key是 'class'
+element.setAttribute('class', '新类名');
+
+-----------------------
+H5自定义属性
+H5规定自定义属性data-开头作为属性名并复制
+比如 <div data-index='1'></div>
+或者使用js设置
+element.setAttribute('data-index', 1);
+
+-----------------------
+获取H5自定义属性
+1.兼容性获取 element.getAttribute('data-index');
+2.H5新增 element.dataset.index 或者 element.dataset['index']
+    如果自定义属性名有多个-链接的属性名，获取的时候采用驼峰法
+<div data-num='5' data-div-name='kkk'></div>
+<script>
+    let ele = document.querySelector('div');
+    console.log(ele.getAttribute('data-num'));//输出5
+    console.log(ele.dataset.num);//输出5
+    console.log(ele.getAttribute('data-div-name'));//输出kkk
+    console.log(ele.dataset.divName);//输出kkk
+    console.log(ele.dataset['divName']);//输出kkk
+</script>
+---------------------------------------------
+节点概述
+一般的，节点至少拥有nodeType(节点类型)、nodeName(节点名称)
+和nodeValue(节点值)这三个基本属性
+
+元素节点 nodeType 为 1
+属性节点 nodeType 为 2
+文本节点 nodeType 为 3 (文本节点包含文字、空格、换行等)
+
+实际开发，节点操作主要的是元素节点
+
+-----------------------
+节点层级
+利用DOM树可以把及诶单划分为不同的层级关系，常见的是父子兄层级关系
+
+1.父级节点
+node.parentNode 
+    得到的是离元素最近的父级节点 
+    如果指定的节点没有父节点则返回null
+
+<div class="box">
+    <div class="child"></div>
+</div>
+<script>
+    let child = document.querySelector('.child');
+    let box = child.parentNode;
+    console.log(child.parentNode === document.querySelector('.box'));//输出true
+</script>
+
+-----------------------
+子节点
+1.parentNode.childNodes (标准)
+    获取所有的节点，包含元素节点、文本节点等
+2.parentNode.children (非标准)
+    parentNode.children是一个只读属性，返回所有的子元素节点，其余节点不返回
+    虽然children是非标准，但是得到了各个浏览器的支持
+3.parentNode.firstChild
+    firstChild返回第一个子节点，找不到则返回null、包含所有类型的节点
+4.parentNode.lastChild
+    lastChild返回最后一个子节点，找不到则返回null、包含所有类型的节点
+5.parentNode.firstElementChild (IE9以上才支持)
+    firstElementChild返回第一个元素子节点，找不到则返回null
+6.parentNode.lastElementChild (IE9以上才支持)
+    lastElementChild返回最后一个元素子节点，找不到则返回null
+7.parentNode.children[0]
+    获取第一个元素子节点，没有兼容性问题
+8.parentNode.children[parentNode.children.length - 1]
+    获取最后一个元素子节点，没有兼容性问题
+
+<div class="box">
+    <div class="child"></div>
+</div>
+<script>
+    let box = document.querySelector('.box');
+    let childs = box.childNodes;
+    console.log("childs", childs);//[text, div.child, text]
+    console.log(childs.length);//是三个
+    //其中text是里边的换行文本节点
+
+    //如果只想获取里边的元素节点,需要 遍历子节点的nodeType来筛选
+    let eleChilds = box.children;
+    console.log("eleChilds", eleChilds);
+    console.log(eleChilds.length);
+
+    console.log("firstChild", box.firstChild);//输出 text节点
+    console.log("lastChild", box.lastChild);//输出 text节点
+    console.log("firstElementChild", box.firstElementChild);//输出 <div class="child"></div>
+    console.log("lastElementChild", box.lastElementChild);//输出 <div class="child"></div>
+
+    console.log("firstElementChild", box.children[0]);//输出 <div class="child"></div>
+    console.log("lastElementChild", box.children[box.children.length - 1]);//输出 <div class="child"></div>
+
+</script>
+
+-----------------------
+兄弟节点
+1.node.nextSibling
+    nextSibling返回当前元素的下一个兄弟节点，找不到返回null。包含所有类型节点
+2.node.nextElementSibling
+    nextElementSibling返回当前元素的下一个元素类型兄弟节点，找不到返回null
+
+<div class="box1"></div>
+<div class="box2"></div>
+<script>
+    let box1 = document.querySelector('.box1');
+    console.log(box1.nextSibling); //输出 text节点
+    console.log(box1.nextElementSibling);//输出 <div class="box2"></div>
+</script>
 
 -----------------------
 

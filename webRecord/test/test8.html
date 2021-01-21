@@ -7,19 +7,12 @@
 
 </head>
 <body>
-
-    <input type="text" name="" id="text" value="推荐内容">
+    <div class="box1"></div>
+    <div class="box2"></div>
     <script>
-        let text = document.querySelector("#text");
-        text.onfocus = () => {
-            text.value = "";
-        }
-        text.onblur = () => {
-            if(text.value === "") {
-                text.value = "推荐内容"
-            }
-        }
+        let box1 = document.querySelector('.box1');
+        console.log(box1.nextSibling);//
+        console.log(box1.nextElementSibling);
     </script>
-
 </body>
 </html>
