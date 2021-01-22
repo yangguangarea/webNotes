@@ -391,6 +391,9 @@ node.parentNode
     nextSibling返回当前元素的下一个兄弟节点，找不到返回null。包含所有类型节点
 2.node.nextElementSibling
     nextElementSibling返回当前元素的下一个元素类型兄弟节点，找不到返回null
+3.node.previousElementSibling
+    previousElementSibling返回当前元素的上一个元素类型兄弟节点，找不到返回null
+
 
 <div class="box1"></div>
 <div class="box2"></div>
@@ -398,9 +401,31 @@ node.parentNode
     let box1 = document.querySelector('.box1');
     console.log(box1.nextSibling); //输出 text节点
     console.log(box1.nextElementSibling);//输出 <div class="box2"></div>
+    console.log(box1.previousElementSibling);//输出 null
+    console.log(box1.nextElementSibling.previousElementSibling);//输出 <div class="box1"></div>
 </script>
 
 -----------------------
+创建节点
+document.createElement('tagName')
+
+添加节点
+1.node.appendChild(child)
+    将一个节点添加到指定父节点的子节点列表末尾。类似css里面的after伪元素
+2.node.insertBefore(新的元素, 指定子元素)
+    将一个节点添加到父节点中指定子元素的前面。类似css里面的before伪元素
+
+<div class="box">父节点内容</div>
+<script>
+    let newNode = document.createElement('div');
+    newNode.innerText = '子节点内容111';
+    newNode.setAttribute('class', 'childBox');
+    document.querySelector('.box').appendChild(newNode);
+    
+    let newNode2 = document.createElement('div');
+    newNode2.innerText = '子节点内容222';
+    document.querySelector('.box').insertBefore(newNode2, newNode);
+</script>
 
 -----------------------
 

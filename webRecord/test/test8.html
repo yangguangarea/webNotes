@@ -7,12 +7,17 @@
 
 </head>
 <body>
-    <div class="box1"></div>
-    <div class="box2"></div>
+
+    <div class="box">父节点内容</div>
     <script>
-        let box1 = document.querySelector('.box1');
-        console.log(box1.nextSibling);//
-        console.log(box1.nextElementSibling);
+        let newNode = document.createElement('div');
+        newNode.innerText = '子节点内容111';
+        newNode.setAttribute('class', 'childBox');
+        document.querySelector('.box').appendChild(newNode);
+        
+        let newNode2 = document.createElement('div');
+        newNode2.innerText = '子节点内容222';
+        document.querySelector('.box').insertBefore(newNode2, newNode);
     </script>
 </body>
 </html>
