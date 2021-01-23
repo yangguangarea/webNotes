@@ -429,12 +429,25 @@ document.createElement('tagName')
 
 -----------------------
 删除节点
-
-
+1.node.removeChild(child)
+    从DOM中删除一个子节点，返回删除的节点
+2.node.remove()
+    移除自己
 
 -----------------------
-
-
+复制节点
+node.cloneNode(isdeep)
+    该方法返回调用该方法的节点的一个副本
+    如果括号参数为空或者为false。则是浅拷贝，不会克隆里面的子节点
+    如果括号参数为true,则是深拷贝，会复制节点本身以及里面的所有子节点
+    
+<div class="box">内容
+    <div class="aaa"></div>
+</div>
+<script>
+    let newNode = document.querySelector('.box').cloneNode(true);
+    document.querySelector('.box').parentNode.appendChild(newNode);
+</script>
 
 ---------------------------------------------
 
