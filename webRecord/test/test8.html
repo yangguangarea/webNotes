@@ -7,14 +7,23 @@
 
 </head>
 <body>
-    <button>按钮</button>
+    <button class="tradition">传统方式</button>
+    <button class="listener">注册监听方式</button>
     <script>
-        let btn = document.querySelector('button')
-        let kkk = 0;
-        btn.onclick = ()=> {
-            document.write('<div>' + kkk + '</div>');
-            kkk++;
+        let traditionBtn = document.querySelector(".tradition");
+        traditionBtn.onclick = () => {
+            console.log("先注册的事件");
         }
+        traditionBtn.onclick = () => {
+            console.log("后注册的事件");
+        }
+        let listenerBtn = document.querySelector(".listener");
+        listenerBtn.addEventListener("click", () => {
+            console.log("先注册的事件");
+        });
+        listenerBtn.addEventListener("click", () => {
+            console.log("后注册的事件");
+        });
     </script>
 </body>
 </html>
