@@ -7,23 +7,16 @@
 
 </head>
 <body>
-    <button class="tradition">传统方式</button>
     <button class="listener">注册监听方式</button>
     <script>
-        let traditionBtn = document.querySelector(".tradition");
-        traditionBtn.onclick = () => {
-            console.log("先注册的事件");
-        }
-        traditionBtn.onclick = () => {
-            console.log("后注册的事件");
-        }
         let listenerBtn = document.querySelector(".listener");
-        listenerBtn.addEventListener("click", () => {
+        let cb = () => {
             console.log("先注册的事件");
-        });
-        listenerBtn.addEventListener("click", () => {
-            console.log("后注册的事件");
-        });
+        }
+        listenerBtn.addEventListener("click", cb);
+        listenerBtn.addEventListener("click", cb);
+        listenerBtn.removeEventListener("click", cb);
+        // listenerBtn.removeEventListener("click", cb);
     </script>
 </body>
 </html>
