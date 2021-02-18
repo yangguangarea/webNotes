@@ -7,16 +7,11 @@
 
 </head>
 <body>
-    <button class="listener">注册监听方式</button>
     <script>
-        let listenerBtn = document.querySelector(".listener");
-        let cb = () => {
-            console.log("先注册的事件");
-        }
-        listenerBtn.addEventListener("click", cb);
-        listenerBtn.addEventListener("click", cb);
-        listenerBtn.removeEventListener("click", cb);
-        // listenerBtn.removeEventListener("click", cb);
+        document.addEventListener('keydown', function(e) {
+            console.log(e.keyCode);
+        })
     </script>
+    
 </body>
 </html>
