@@ -8,10 +8,13 @@
 </head>
 <body>
     <script>
-        document.addEventListener('keydown', function(e) {
-            console.log(e.keyCode);
-        })
-    </script>
+        var num = 5;//num是全局对象，全局对象会自动变为window中的一个属性
+        console.log(window.num);
     
+        function fun() {
+            console.log('fun');
+        }
+        window.fun();
+    </script>
 </body>
 </html>
