@@ -7,14 +7,14 @@
 
 </head>
 <body>
+    <button>按钮</button>
     <script>
-        var num = 5;//num是全局对象，全局对象会自动变为window中的一个属性
-        console.log(window.num);
-    
-        function fun() {
-            console.log('fun');
-        }
-        window.fun();
+        let btn = document.querySelector('button');
+        btn.addEventListener('click', () => {
+
+            location.reload();
+        });
     </script>
+
 </body>
 </html>
