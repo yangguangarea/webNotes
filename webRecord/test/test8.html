@@ -4,17 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .box1 {
+            /* position: fixed; */
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            margin: 100px;
+        }
+        .box2 {
+            width: 50px;
+            height: 50px;
+            background-color: hotpink;
+            margin-top: 10px;
+            margin-left: 10px;
+            padding: 5px;
+            border: 2px blue solid;
+        }
+    </style>
 </head>
 <body>
-    <button>按钮</button>
+
+    <div class="box1">
+        <div class="box2"></div>
+    </div>
+
+
     <script>
-        let btn = document.querySelector('button');
-        btn.addEventListener('click', () => {
-
-            location.reload();
-        });
+        let box1 = document.querySelector('.box1');
+        let box2 = document.querySelector('.box2');
+        console.log('box2.offsetParent', box2.offsetParent);
+        // console.log('box2.offsetHeight', box2.offsetHeight);
     </script>
-
 </body>
 </html>
