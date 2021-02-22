@@ -948,16 +948,131 @@ style.width是可读写属性,可以获取也可以赋值
 
 
 -----------------------
- 
----------------------------------------------
+获取盒子内的鼠标位置
+<div class="box1" style="width: 100px; height: 100px; background-color: pink;"></div>
+<script>
+    let box1 = document.querySelector('.box1');
+    box1.addEventListener('mousemove', function(e) {
+        this.innerHTML = `x:${e.pageX - this.offsetLeft}\ny:${e.pageY - this.offsetTop}`
+    });
+</script>
 
 -----------------------
+拖拽一个盒子跟随鼠标移动
+<div class="box" style="width: 100px; height: 100px; background-color: pink; position: relative;"></div>
+<script>
+    let box = document.querySelector('.box');
+    let touchStartPosX = 0;
+    let touchStartPosY = 0;
+    let isTouch = false
+    box.addEventListener('mousedown', function(e) {
+        touchStartPosX = e.pageX - this.offsetLeft;
+        touchStartPosY = e.pageY - this.offsetTop;
+        isTouch = true;
+    });
+    document.addEventListener('mousemove', function(e) {//给document添加是因为给box添加，鼠标移动过快会丢失mousemove
+        if(isTouch) {
+            box.style.left = e.pageX - touchStartPosX + 'px';
+            box.style.top = e.pageY - touchStartPosY + 'px';
+        }
+    });
+    box.addEventListener('mouseup', function(e) {
+        if(isTouch) {
+            this.style.left = e.pageX - touchStartPosX + 'px';
+            this.style.top = e.pageY - touchStartPosY + 'px';
+            touchStartPosX = 0;
+            touchStartPosY = 0;
+            isTouch = false;
+        }
+    });
+</script>
 
 ---------------------------------------------
+元素可视区client系列
+client系列常用属性:
+element.clientTop:返回元素上边框的大小
+element.clientLeft:返回元素左边框的大小
+element.clientWidth:返回自身包括padding、内容区的宽度，不含边框，返回数值不带单位
+element.clientHeight:返回自身包括padding、内容区的高度，不含边框，返回数值不带单位
+
+---------------------------------------------
+立即执行函数  
+主要作用: 创建一个独立的作用域
+
+写法1: (function() {})();
+写法2: (function(){}());
+
+---------------------------------------------
+元素scroll系列属性
+element.scrollTop:返回被卷去的上侧距离，返回数值不带单位
+element.scrollLeft:返回被卷去的左侧距离，返回数值不带单位
+element.scrollWidth:返回自身实际的宽度，不含边框，返回数值不带单位
+element.scrollHeight:返回自身实际的高度，不含边框，返回数值不带单位
+
+<div class="box1" style="width: 100px;height: 100px;background-color: pink;overflow: auto;">
+    <div class="box2" style="width: 60px;height: 300px;background-color: hotpink;"></div>
+</div>
+<script>
+    let box1 = document.querySelector('.box1');
+    let box2 = document.querySelector('.box2');
+    box1.addEventListener('scroll', function() {
+        console.log('box1', box1.scrollTop);
+        console.log('box2', box2.scrollTop);
+    });
+</script>
+
+页面被卷去的头部：可以通过window.pageYOffset获得
+页面被卷去的左侧：可以通过window.pageXOffset获得
+-----------------------
+页面被卷去的头部兼容性写法
+
+1.声明了DTD，使用document.documentElement.scrollLeft
+2.未声明DTD，使用document.body.scrollLeft
+3.window.pageXOffset, window.pageYOffset ie9开始支持
+<script>
+    function getScroll() {
+        return (
+            left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+            top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0,
+        );
+    }
+</script>
+
+---------------------------------------------
+mouseenter 和 mouseover的区别
+mouseover 鼠标经过自身盒子会触发，经过子盒子还会触发，mouseenter只会经过自身盒子触发
+原因是:mouseenter不会冒泡, mouseover冒泡，所以子盒子的mouseover冒泡给了父盒子导致父盒子监听响应
+
+mouseenter和mouseleave对应
+mouseover和mouseout对应
+
+<div class="box1" style="width: 100px;height: 100px;background-color: pink;position: relative;">
+    <div class="box2" style="width: 60px;height: 60px;background-color: hotpink;position: absolute; top: 10px;left: 10px;"></div>
+</div>
+<script>
+    let box1 = document.querySelector('.box1');
+    let box2 = document.querySelector('.box2');
+    box1.addEventListener('mouseover', function() {
+        console.log("box1 mouseover");
+    });
+    box1.addEventListener('mouseenter', function() {
+        console.log("box1 mouseenter");
+    });
+    box2.addEventListener('mouseover', function() {
+        console.log("box2 mouseover");
+    });
+    box2.addEventListener('mouseenter', function() {
+        console.log("box2 mouseenter");
+    });
+</script>
+
+---------------------------------------------
+动画函数封装
+
+
+
 
 -----------------------
-
----------------------------------------------
 
 -----------------------
 
