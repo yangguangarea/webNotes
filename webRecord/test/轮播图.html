@@ -110,8 +110,7 @@
     </div>
     
     <script>
-        
-        function moveAnimation(element, targetPos) {
+        function moveAnimation(element, targetPos, cb) {
             if(!element) return;
             
             let moveSize = targetPos - element.offsetLeft;
@@ -124,6 +123,7 @@
                     element.style.left = element.offsetLeft + step + 'px';
                 } else {
                     clearInterval(element.timeId);
+                    cb && cb();
                 }
             }, 16);
         }
@@ -134,16 +134,41 @@
 
         let showImgIndex = 0;
 
+        function changeDotLight(lightIndex) {
+            let dots = document.querySelectorAll('.dot');
+
+            for (let index = 0; index < dots.length; index++) {
+                if(index === lightIndex) {
+                    dots[index].style.opacity = '1';
+                } else {
+                    dots[index].style.opacity = '.5';
+                }
+            }
+        }
+
+        let box = document.querySelector('.box');
+        box.addEventListener('mouseenter', function() {
+            leftBtn.style.display = 'block';
+            rightBtn.style.display = 'block';
+        });
+        box.addEventListener('mouseleave', function() {
+            leftBtn.style.display = 'none';
+            rightBtn.style.display = 'none';
+        });
+
+        changeDotLight(showImgIndex);
         leftBtn.addEventListener('click', function() {
             //左滑一张图
             if(showImgIndex === 0) return;
             showImgIndex--;
+            changeDotLight(showImgIndex);
             moveAnimation(imagebox, -showImgIndex * 500);
         });
         rightBtn.addEventListener('click', function() {
             // 右滑一张图
             if(showImgIndex === 3) return;
             showImgIndex++;
+            changeDotLight(showImgIndex);
             moveAnimation(imagebox, -showImgIndex * 500);
         });
         let dots = document.querySelectorAll('.dot');
@@ -151,6 +176,7 @@
             const dot = dots[index];
             dot.addEventListener('click', function() {
                 showImgIndex = index;
+                changeDotLight(showImgIndex);
                 moveAnimation(imagebox, -index * 500);
             });
         }
