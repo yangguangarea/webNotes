@@ -134,6 +134,15 @@
 
         let showImgIndex = 0;
 
+        function startScroll() {
+            let timeid = setInterval(() => {
+                rightBtn.click();
+            }, 2000);
+            return timeid;
+        }
+        //间隔2s自动滚动
+        let timeid = startScroll();
+
         function changeDotLight(lightIndex) {
             let dots = document.querySelectorAll('.dot');
 
@@ -150,24 +159,33 @@
         box.addEventListener('mouseenter', function() {
             leftBtn.style.display = 'block';
             rightBtn.style.display = 'block';
+            clearInterval(timeid);
         });
         box.addEventListener('mouseleave', function() {
             leftBtn.style.display = 'none';
             rightBtn.style.display = 'none';
+            timeid = startScroll();
         });
 
         changeDotLight(showImgIndex);
         leftBtn.addEventListener('click', function() {
             //左滑一张图
-            if(showImgIndex === 0) return;
-            showImgIndex--;
+            if(showImgIndex === 0) {
+                showImgIndex = 3;
+            } else {
+                showImgIndex--;
+            }
             changeDotLight(showImgIndex);
             moveAnimation(imagebox, -showImgIndex * 500);
+            accumulateTime = 0;
         });
         rightBtn.addEventListener('click', function() {
             // 右滑一张图
-            if(showImgIndex === 3) return;
-            showImgIndex++;
+            if(showImgIndex === 3) {
+                showImgIndex = 0;
+            } else {
+                showImgIndex++;
+            }
             changeDotLight(showImgIndex);
             moveAnimation(imagebox, -showImgIndex * 500);
         });
@@ -180,6 +198,8 @@
                 moveAnimation(imagebox, -index * 500);
             });
         }
+
+
 
     </script>
 
