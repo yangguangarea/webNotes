@@ -1086,11 +1086,63 @@ targetTouches:正在触摸当前DOM元素上的手指的一个列表
 changedTouches:手指状态发生了改变的列表，从无到有，从有到无变化
 
 
-
-
------------------------
+<div class="box" style="width: 100px;height: 100px;background-color: pink;"></div>
+<script>
+    let box = document.querySelector('.box');
+    box.addEventListener('touchstart', function(e) {
+        // e.targetTouches[0] 就是触摸dom元素的第一个触摸点
+    });
+    box.addEventListener('touchmove', function(e) {
+        //手指移动也会触发滚动屏幕，所以想阻止默认的屏幕滚动 e.preventDefault()
+        e.preventDefault();
+    });
+    box.addEventListener('touchend', function(e) {
+        // 当离开了屏幕
+        // e.changedTouches存在触摸点
+        // e.touches和e.targetTouches长度都为0
+    });
+</script>
 
 ---------------------------------------------
+监听过渡完成事件 transitionend
+<button class="box">盒子</button>
+<script>
+    let btn = document.querySelector('.box');
+    btn.addEventListener('click', function() {
+        //添加过渡动画
+        btn.style.transition = 'all 1s';
+        btn.style.transform = `translateX(${100}px)`
+    });
+    btn.addEventListener('transitionend', function() {
+        btn.style.transition = 'none';
+        btn.style.transform = `translateX(${0}px)`
+    });
+</script>
+
+---------------------------------------------
+classList属性
+classList属性是HTML5新增的一个属性，返回元素的类名。但是ie10以上版本支持
+该属性用于在元素中添加，移除及切换CSS类，有以下方法
+
+element.classList.add('类名'); 添加类名
+element.classList.remove('类名'); 删除类名
+element.classList.toggle('类名'); 切换类名 判断是否有这个类名，有就去除，没有就添加
+
+<div class="one two three-2"></div>
+<script>
+    let div = document.querySelector('.one');
+    console.log(div.classList.value === div.className);//true
+    console.log("classList:", div.classList);//classList: DOMTokenList(3) ["one", "two", "three-2", value: "one two three-2"]
+    div.classList.add('four');
+    console.log("classList:", div.classList);//classList: DOMTokenList(4) ["one", "two", "three-2", "four", value: "one two three-2 four"]
+    div.classList.remove(div.classList[0]); 
+    console.log("classList:", div.classList);//classList: DOMTokenList(3) ["two", "three-2", "four", value: "two three-2 four"]
+    div.classList.toggle('five');
+    console.log("classList:", div.classList);//classList: DOMTokenList(4) ["two", "three-2", "four", "five", value: "two three-2 four five"]
+    div.classList.toggle('five');
+    console.log("classList:", div.classList);//classList: DOMTokenList(3) ["two", "three-2", "four", value: "two three-2 four"]
+</script>
+-----------------------
 
 -----------------------
 

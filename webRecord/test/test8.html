@@ -5,26 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-
+    <style>
+        body {
+            height: 2000px;
+        }
+    </style>
 </head>
 <body>
-
-    <div class="box" style="width: 100px;height: 100px;background-color: pink;"></div>
-<script>
-    let box = document.querySelector('.box');
-    box.addEventListener('touchstart', function(e) {
-        // e.targetTouches[0] 就是触摸dom元素的第一个触摸点
-    });
-    box.addEventListener('touchmove', function(e) {
-        
-    });
-    box.addEventListener('touchend', function(e) {
-        // 当离开了屏幕
-        // e.changedTouches存在触摸点
-        // e.touches和e.targetTouches长度都为0
-    });
-</script>
-
+    <div class="one two three-2"></div>
+    <script>
+        let div = document.querySelector('.one');
+        console.log(div.classList.value === div.className);//true
+        console.log("classList:", div.classList);
+        div.classList.add('four');
+        console.log("classList:", div.classList);//["one", "two", "three-2", value: "one two three-2"]
+        div.classList.remove(div.classList[0]); 
+        console.log("classList:", div.classList);
+        div.classList.toggle('five');
+        console.log("classList:", div.classList);
+        div.classList.toggle('five');
+        console.log("classList:", div.classList);
+    </script>
 </body>
 
 </html>
